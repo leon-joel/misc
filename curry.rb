@@ -73,7 +73,16 @@ p f2            # -> Proc
 # 結果を出す（引数3に3を入れてmethodを呼び出す）
 f2.call(3)      # -> 6
 
+
 puts '2引数を同時に渡して部分適用する'
 ff2 = curried_func3.call(1, 2)
 p ff2
 ff2.call(3)
+
+puts '違う書き方で'
+fff2 = curried_func3[2][3]
+p fff2    # -> Proc
+fff2[4]
+
+puts 'いきなり結果を出すところまで実行'
+curried_func3[1][3][5]  # 計算結果が出力される ※つまり、引数の数によって Proc が返ってくるか、計算結果が返されるかが変わる
