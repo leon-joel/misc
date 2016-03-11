@@ -187,3 +187,8 @@ end
 
 p MyClass.new.my_method       # -> refine... が依然有効！
 p MyClass.new.another_method  # -> monkey... ★refineではなくglobalにパッチをあてた場合は、ちゃんと効く
+
+
+
+
+
