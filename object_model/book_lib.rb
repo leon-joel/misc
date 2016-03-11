@@ -74,7 +74,7 @@ puts <<-'EOS'.strip_heredoc
        Printable  ←includeによって挿入(2)
        Book
        Prep1      ←prependによって挿入(1)
-  b -> Prep2      ←prependによって挿入(2)
+  b -> Prep2      ←prependによって挿入(2) ★bがBookではなく、最後にprependしたPrep2を指していることに注目！
        Book2
 EOS
 
