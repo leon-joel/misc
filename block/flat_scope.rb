@@ -20,12 +20,12 @@ mc.my_method
 puts
 puts 'スコープゲートを外す！【スコープのフラット化】【入れ子構造のレキシカルスコープ】'
 
-puts '1. classを動的に生成する'
+puts '1. クロージャを使って、classを動的に生成する'
 MyClass2 = Class.new do
   puts "クラス定義内からトップレベルのmy_varを参照できる: #{my_var}"
 
 
-  puts '2. methodも動的に生成する'
+  puts '2. クロージャを使って、methodも動的に生成する'
   define_method :my_method do
     puts "メソッド定義内からもトップレベルのmy_varを参照する: #{my_var}"
   end
