@@ -67,12 +67,16 @@ end
 
 #nil.ring     # ここではNoMethodErrorが出る
 
-using MyRef   # refineを適用
+# using MyRef   # refineを適用
 
 # nil.ring    # ここだとちゃんとringする
 
 
 class Alarm
+  # ここにusingを置くのが一番適切かな。
+  # 実際にringを呼び出しているのはここだし、最も影響範囲を狭められるから。
+  using MyRef
+
   def device
     # nilガードでNullDeviceを返すようにすることで、
     # 「デバイスなし」の場合でもNoMethodErrorが発生しないようにする
