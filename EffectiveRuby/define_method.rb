@@ -49,24 +49,16 @@ class AuditDecorator
     @object = object
     @logger = Logger.new($stdout)
 
-    mod = Module.new do
-      # ここで@objectではなくobjectを使っている点に注意。
-      # @objectとすると、インスタンス変数ではなく、モジュール変数を参照しにいくので。
-      object.public_methods.each do |name|
-        define_method(name) do |*args, &block|
-          # @logger.info("calling #{name} on #{@object.inspect}")
+    @object.public_methods.each do |name|
+      # p self    # -> AuditDecoratorインスタンス
+      # define_singleton_methodメソッドは、レシーバのオブジェクトに特異メソッドを定義します
+      define_singleton_method(name) do |*args, &block|
+        # @logger.info("calling #{name} on #{@object.inspect}")
 
-          # メソッド内では、@objectが使用できる
-          @object.send(name, *args, &block)
-        end
+        # メソッド内では、@objectが使用できる
+        @object.send(name, *args, &block)
       end
     end
-
-    # extend(*modules)
-    #    引数で指定したモジュールのインスタンスメソッドを
-    #    self の特異 メソッドとして追加します。（つまり、このオブジェクトのインスタンスメソッドとして実装される）
-    #    http://ref.xaio.jp/ruby/classes/object/extend
-    extend(mod)
 
     p self.class.ancestors            # -> [String, Comparable, Object, Kernel, BasicObject]
     p self.singleton_class.ancestors  # -> [#<Class:#<String:0x2aac308>>, String, Comparable, Object, Kernel, BasicObject]
