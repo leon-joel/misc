@@ -69,6 +69,11 @@ class AuditDecorator
   #   @logger.info("calling #{name} on #{@object.inspect}")
   #   @object.send(name, *args, &block)
   # end
+
+  # # method_missingを使わざるを得ない場合は respond_to_missing? も併用することを検討
+  # def respond_to_missing?(name, include_private)
+  #   @hash.respond_to?(name, include_private) || super
+  # end
 end
 
 puts
