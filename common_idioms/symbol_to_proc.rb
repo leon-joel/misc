@@ -72,6 +72,33 @@ require 'prime'
 p (1..Float::INFINITY).lazy.select(&:prime?).first(20)
 
 
+
+puts <<-EOS.strip_heredoc
+
+Lazyとinjectを組み合わせてみる
+100以下のprimeを全部合計
+EOS
+# ※resultに受けずに、directにpで出力しようとするとエラーになる！
+#   injectのblockがp に取られてしまうっぽい！（そして、pはblockを無視する）
+#   但し、blockを do-end ではなく、より結合度の高い{} でくくった場合は、
+#   blockがinjectに結合するため、正しく動作する。
+#
+#   http://qiita.com/riocampos/items/43e4431ddff93e01a18d
+#   http://qiita.com/zom/items/97ae4e825d57a769a945
+#
+#   コーディングルールとしては、『単一行blockなら{}, 複数行ならdo-end』というのが多いようだが、
+#   例外として、『method chainの場合には {} を使う』というのもあった。
+#   ※個人的にはblockは全て{}でくくるようにした方がトラブルが減るような気がするんだが。
+result = (1..Float::INFINITY)
+             .lazy
+             .select(&:prime?)
+             .inject(0) do |total, i|
+  break total if 100 < i
+  total + i
+end
+p result
+
+
 puts
 puts "全然関係ないが、freezeした文字列は同じインスタンスを共有している"
 5.times do
