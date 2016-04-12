@@ -1,5 +1,5 @@
 #require 'pp'
-require 'logger'
+#require 'logger'
 require 'active_support/core_ext/string/strip'
 
 
