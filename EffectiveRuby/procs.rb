@@ -49,6 +49,7 @@ puts test_with_block(& ->(x){x} )   # -> true
 
 puts <<-EOS.strip_heredoc
 
+渡されたBlockが必要とする引数の数をチェック
 ===========================================================
 EOS
 
