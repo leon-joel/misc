@@ -80,19 +80,75 @@ ensure
   # res.close   # これをコメント化すると最後の最後に（ENDより後で）finalizerが呼び出される
 end
 
+puts <<-EOS.strip_heredoc
 
+RubyProf
+===========================================================
+EOS
+
+# require 'ruby-prof'
+#
+# RubyProf.start
+#
 # str = "abc"
-# 100000.times do |i|
+# 10000.times do |i|
 #   str += i.to_s
 #
 #   s = str.first(20)
 #   puts "#{s.object_id}: #{s}" if i % 1000 == 0
 # end
-
+#
+# result = RubyProf.stop
+# printer = RubyProf::GraphPrinter.new(result)
+# # printer = RubyProf::CallTreePrinter.new(result)
+# printer.print(STDOUT, {})
 
 puts "END"
 
-pp GC.stat
+
+puts <<-EOS.strip_heredoc
+
+GC.stat
+===========================================================
+EOS
+# Garbage Collector関連のSTATSをハッシュで取得出来る
+# pp GC.stat
+
+puts <<-EOS.strip_heredoc
+
+オブジェクトのプロファイル
+===========================================================
+EOS
+require 'objspace'
+
+ObjectSpace.trace_object_allocations_start
+
+GC.start
+
+File.open("memory.json", "w") do |file|
+  ObjectSpace.dump_all(output: file)
+end
+
+ObjectSpace.trace_object_allocations_stop
+
+
+puts <<-EOS.strip_heredoc
+
+MemoryProfiler
+===========================================================
+EOS
+require 'memory_profiler'
+
+report = MemoryProfiler.report do
+  str = ""
+  10.times do |i|
+    str += i.to_s
+  end
+  puts str
+end
+
+report.pretty_print
+
 
 puts
 puts

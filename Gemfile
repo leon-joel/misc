@@ -15,6 +15,13 @@ gem 'sqlite3'
 
 gem 'simplecov'
 
+# Windowsでは動かない
+# gem 'stackprof'
+
+gem 'ruby-prof'
+
+gem 'memory_profiler'
+
 group :test do
   if RUBY_PLATFORM =~ /(win32|w32)/
     gem "win32console", '1.3.0'
