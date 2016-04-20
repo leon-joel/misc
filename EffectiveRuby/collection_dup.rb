@@ -48,6 +48,6 @@ end
 p presets = %w(90.1 106.2 88.5)
 p tuner = Tuner2.new(presets)
 
-p presets     # ★オリジナルの配列が変更されてしまっている！
+p presets     # ★変更されていない！
 
 
