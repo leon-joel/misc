@@ -38,15 +38,22 @@ dl 定義リスト/ dt 用語 / dd 説明
   <form action="survey.php" method="post">
     <p>メールアドレス: <input type="text" name="email" size="50"
                        placeholder="please enter email" disabled></p>
-    <p>
-      Phone:
-      <label><input type="checkbox" name="phone" value="android" checked> Android</label>
-      <input type="checkbox" name="phone" value="iphone" id="iphone"><label for="iphone"> iPhone</label>
-    </p>
-    <p>
-      Color:
-      <input type="radio" name="color" value="red" checked>Red
-      <input type="radio" name="color" value="blue">Blue
+    <!--<p>City:-->
+      <!--<select name="city">-->
+        <!--<option value="tokyo">東京</option>-->
+        <!--<option value="nagoya" selected>名古屋</option>-->
+        <!--<option value="osaka">大阪</option>-->
+        <!--<option value="fukuoka">福岡</option>-->
+      <!--</select>-->
+    <!--</p>-->
+
+    <p>City: ※ctrl押下で複数選択可
+      <select name="city" multiple size="3">
+        <option value="tokyo">東京</option>
+        <option value="nagoya" selected>名古屋</option>
+        <option value="osaka">大阪</option>
+        <option value="fukuoka">福岡</option>
+      </select>
     </p>
     <p><input type="submit" value="送信！" disabled></p>
   </form>
