@@ -28,44 +28,55 @@ hr: 水平線
 pre: 改行字下げをそのまま保持
 blockquote: 引用
 div: 主にスタイリング目的でのグルーピング
+
+ol 順序付きリスト /ul 順序なしリスト /li リストアイテム
+dl 定義リスト/ dt 用語 / dd 説明
 -->
-  <header>
-    <h1>おいしいごはん！</h1>
-    <nav>
-      - ホーム
-      - このサイトについて
-      - プロフィール
-    </nav>
-  </header>
 
-  <section>
-    <h1>今月のおいしいごはん</h1>
-    <article>
-      <h1>おいしいごはん #12</h1>
-      至高のTKG
-    </article>
-  </section>
+<article>
+  <h1>おいしいごはん <a href="#stuff">[材料]</a></h1>
+  <p>至高のTKG</p>
 
-  <section>
-    <h1>新着のおいしいごはん</h1>
-    <article>
-      おいしいごはん #32
-      はもしゃぶ
-    </article>
-    <article>
-      <h1>おいしいごはん #31</h1>
-      スリランカカレー
-    </article>
-  </section>
+  <table>
+    <thead>
+      <tr>
+        <th>Size</th><th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>S</td><td>150</td>
+      </tr>
+      <tr>
+        <td>M</td><td>180</td>
+      </tr>
+      <tr>
+        <td>L</td><td>200</td>
+      </tr>
+      <tr>
+        <td colspan="2">free for kids!</td>
+      </tr>
+    </tbody>
+  </table>
 
-  <aside>
-    <h1>おすすめレシピ本</h1>
-    - BOOK 1
-    - BOOK 2
-    - BOOK 3
-  </aside>
+  <h2 id="stuff">材料</h2>
+  <ul>
+    <li>卵</li>
+    <li>しょうゆ</li>
+    <li>ご飯</li>
+  </ul>
 
-  <footer>
-    このサイトは @taguchi によって運営されています。
-  </footer>
+  <h2>手順</h2>
+  <ol>
+    <li>まぜる</li>
+    <li>かける</li>
+  </ol>
+
+  <h2>定義</h2>
+  <dl>
+    <dt>TKG</dt>
+    <dd>たまごかけごはん</dd>
+  </dl>
+</article>
+
 </body>
