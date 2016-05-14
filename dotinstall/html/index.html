@@ -35,27 +35,12 @@ dl 定義リスト/ dt 用語 / dd 説明
 
 <article>
   <h1>アンケート</h1>
-  <form action="survey.php" method="post">
-    <p>メールアドレス: <input type="text" name="email" size="50"
-                       placeholder="please enter email" disabled></p>
-    <!--<p>City:-->
-      <!--<select name="city">-->
-        <!--<option value="tokyo">東京</option>-->
-        <!--<option value="nagoya" selected>名古屋</option>-->
-        <!--<option value="osaka">大阪</option>-->
-        <!--<option value="fukuoka">福岡</option>-->
-      <!--</select>-->
-    <!--</p>-->
-
-    <p>City: ※ctrl押下で複数選択可
-      <select name="city" multiple size="3">
-        <option value="tokyo">東京</option>
-        <option value="nagoya" selected>名古屋</option>
-        <option value="osaka">大阪</option>
-        <option value="fukuoka">福岡</option>
-      </select>
-    </p>
-    <p><input type="submit" value="送信！" disabled></p>
+  <form action="survey.php" method="post" novalidate>
+    <p>メールアドレス: <input type="email" name="email" size="50"
+                       placeholder="please enter email" required></p>
+    <p>料金: <input type="number" name="price"></p>
+    <p>誕生日: <input type="date" name="birthday"></p>
+    <p><input type="submit" value="送信！"></p>
   </form>
 </article>
 
