@@ -12,8 +12,60 @@
   <link rel="stylesheet" href="mystyles.css">
 </html>
 <body>
-  <p>こんにちは！</p>
-  <p id="message">こんにちは！</p>
-  <p class="message active">こんにちは！</p>
-  <p class="message" style="background:skyblue;">こんにちは！</p>
+<!--
+HTML5のタグ 文書構造関連
+header:
+footer:
+nav: ナビゲーション。パンくずリストなど。
+article: 記事。独立しているコンテンツ。
+aside: 副次的なコンテンツ。広告など。
+section: それ以外の情報のかたまり。見出しを付けるようなもの。
+h1 - h6:
+-->
+<!--
+p: 段落
+hr: 水平線
+pre: 改行字下げをそのまま保持
+blockquote: 引用
+div: 主にスタイリング目的でのグルーピング
+-->
+  <header>
+    <h1>おいしいごはん！</h1>
+    <nav>
+      - ホーム
+      - このサイトについて
+      - プロフィール
+    </nav>
+  </header>
+
+  <section>
+    <h1>今月のおいしいごはん</h1>
+    <article>
+      <h1>おいしいごはん #12</h1>
+      至高のTKG
+    </article>
+  </section>
+
+  <section>
+    <h1>新着のおいしいごはん</h1>
+    <article>
+      おいしいごはん #32
+      はもしゃぶ
+    </article>
+    <article>
+      <h1>おいしいごはん #31</h1>
+      スリランカカレー
+    </article>
+  </section>
+
+  <aside>
+    <h1>おすすめレシピ本</h1>
+    - BOOK 1
+    - BOOK 2
+    - BOOK 3
+  </aside>
+
+  <footer>
+    このサイトは @taguchi によって運営されています。
+  </footer>
 </body>
