@@ -34,49 +34,25 @@ dl 定義リスト/ dt 用語 / dd 説明
 -->
 
 <article>
-  <h1>おいしいごはん <a href="#stuff">[材料]</a></h1>
-  <p>至高のTKG</p>
+  <h1>アンケート</h1>
+  <form action="survey.php" method="post">
+    <p>メールアドレス: <input type="text" name="email" size="50"
+                       placeholder="please enter email" disabled></p>
+    <p>ログイン: <input type="password" name="password" size="50"></p>
+    <input type="hidden" name="user_id" value="23423">
 
-  <table>
-    <thead>
-      <tr>
-        <th>Size</th><th>Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>S</td><td>150</td>
-      </tr>
-      <tr>
-        <td>M</td><td>180</td>
-      </tr>
-      <tr>
-        <td>L</td><td>200</td>
-      </tr>
-      <tr>
-        <td colspan="2">free for kids!</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2 id="stuff">材料</h2>
-  <ul>
-    <li>卵</li>
-    <li>しょうゆ</li>
-    <li>ご飯</li>
-  </ul>
-
-  <h2>手順</h2>
-  <ol>
-    <li>まぜる</li>
-    <li>かける</li>
-  </ol>
-
-  <h2>定義</h2>
-  <dl>
-    <dt>TKG</dt>
-    <dd>たまごかけごはん</dd>
-  </dl>
+    <p>
+      コメント:
+      <textarea name="comment" id="" cols="40" rows="5" placeholder="何でも入力してね♡"></textarea>
+    </p>
+    <p>
+      <button type="submit"><strong>送信!!!</strong></button>
+    </p>
+    <p>
+      <button type="button">処理をする！</button>
+    </p>
+    <p><input type="submit" value="送信！" disabled></p>
+  </form>
 </article>
 
 </body>
