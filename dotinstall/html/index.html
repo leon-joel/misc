@@ -34,14 +34,10 @@ dl 定義リスト/ dt 用語 / dd 説明
 -->
 
 <article>
-  <h1>アンケート</h1>
-  <form action="survey.php" method="post" novalidate>
-    <p>メールアドレス: <input type="email" name="email" size="50"
-                       placeholder="please enter email" required></p>
-    <p>料金: <input type="number" name="price"></p>
-    <p>誕生日: <input type="date" name="birthday"></p>
-    <p><input type="submit" value="送信！"></p>
-  </form>
+  <h1>文字参照</h1>
+  <p>「&lt;p&gt;タグは段落です」</p>
+  <input type="text" value="区切り文字は&quot;です">
+  <p>「この記号の文字参照は&amp;&quot;です」</p>
 </article>
 
 </body>
