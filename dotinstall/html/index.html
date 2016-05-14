@@ -38,18 +38,15 @@ dl 定義リスト/ dt 用語 / dd 説明
   <form action="survey.php" method="post">
     <p>メールアドレス: <input type="text" name="email" size="50"
                        placeholder="please enter email" disabled></p>
-    <p>ログイン: <input type="password" name="password" size="50"></p>
-    <input type="hidden" name="user_id" value="23423">
-
     <p>
-      コメント:
-      <textarea name="comment" id="" cols="40" rows="5" placeholder="何でも入力してね♡"></textarea>
+      Phone:
+      <label><input type="checkbox" name="phone" value="android" checked> Android</label>
+      <input type="checkbox" name="phone" value="iphone" id="iphone"><label for="iphone"> iPhone</label>
     </p>
     <p>
-      <button type="submit"><strong>送信!!!</strong></button>
-    </p>
-    <p>
-      <button type="button">処理をする！</button>
+      Color:
+      <input type="radio" name="color" value="red" checked>Red
+      <input type="radio" name="color" value="blue">Blue
     </p>
     <p><input type="submit" value="送信！" disabled></p>
   </form>
