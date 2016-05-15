@@ -101,7 +101,7 @@ a { color: red; }
 /*a { color: red !important;}*/
 
 /* 0 0 1 1*/
-/* 疑似クラスを追加したので、上のものより優先度が高くなる*/
+/* クラスを追加したので、上のものより優先度が高くなる*/
 a.rarara { color: pink; }
 /* 0 0 1 1*/
 /* 同じ詳細度なら後勝ち*/
@@ -109,3 +109,21 @@ a.search { color: orange; }
 
 /* 0 1 0 1*/
 a#site { color: blue; }
+
+
+/*
+値について
+*/
+/*長さ 絶対指定*/
+body { font-size: 22px;}
+/* 親要素に対する相対指定（倍率）*/
+/* 当該タグがおかれている場所によって絶対値は変わるということ*/
+h1 { font-size: 3em;}
+h2 { font-size: 200%;}
+
+/*色*/
+/*h1 { color: cyan;}*/
+/*h1 { color: #0000ff;}*/
+/*h1 { color: #00f;}*/
+/*h1 { color: rgb(0, 0, 128);}*/
+h1 { color: rgb(0%, 0%, 25%);}
