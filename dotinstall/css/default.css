@@ -26,4 +26,20 @@ div {
 
     /*上の線だけ指定することも出来る*/
     /*border-top: skyblue 10px double;*/
+
+    /*上下 左右*/
+    /*padding: 10px 50px;*/
+
+    /*上から時計回りに*/
+    padding: 10px 30px 50px 70px;
+}
+
+div#box1 {
+    margin: 10px 20px 30px;
+}
+
+div#box2 {
+    background-color: silver;
+    /*上のbox1との間はマージンの相殺が発生するため、20+30pxではなく大きい方のマージン30pxしか空かない*/
+    margin: 20px;
 }
