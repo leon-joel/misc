@@ -43,3 +43,15 @@ div#box2 {
     /*上のbox1との間はマージンの相殺が発生するため、20+30pxではなく大きい方のマージン30pxしか空かない*/
     margin: 20px;
 }
+
+p {
+    color: silver;
+    font-size: 24px;
+    font-family: Arial;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: underline line-through overline;
+    /*デコレーションを取り消すプロパティ*/
+    /*text-decoration: none;*/
+
+}
