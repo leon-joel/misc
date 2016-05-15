@@ -1,43 +1,18 @@
 /*
-position:
-
-- static    デフォルト
-- relative  staticからの相対位置
-
-- fixed  ウィンドウの左上からの位置
-         スクロールに追従する
-         後続の要素の配置に影響を与えない（無視される）
-- absolute
-    親要素がstaticの場合:
-      ウィンドウ左上からの位置（スクロールに追従しない）
-    親要素がstatic以外の場合:
-      親要素の左上からの位置（スクロールに追従しない）
+display: table
 */
 
-
-body  { margin: 0; }
-#box1 { width: 100px; height: 50px; }
-#box2 { width: 100px; height: 50px; }
-#box3 { width:  50px; height: 25px; }
-
-
-#box1 {
-    background: gray;
-    /*position: relative;*/
-    /*position: fixed;*/
-    /*top: 10px;*/
-    /*left: 10px;*/
+.container {
+    display: table;
+    width: 300px;
 }
-
-#box2 {
-    background: silver;
-    /*position: static;*/
-    position: relative;
+.box {
+    display: table-cell;
+    width: 100px;
 }
-
-#box3 {
-    background: orange;
-    position: absolute;
-    top: 10px;
-    left: 10px;
+.row {
+    display: table-row;
 }
+.gray { background: gray; }
+.silver { background: silver; }
+.orange { background: orange; }
