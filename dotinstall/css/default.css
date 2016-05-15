@@ -1,57 +1,33 @@
-/* ボックスモデル */
-
-body, html { height: 100%; }
-
-body { margin: 0; }
-
-div {
-    /*width: 200px;*/
-    /*height: 100px;*/
-
-    /*親要素に対する相対サイズ*/
-    /*width: 50%;*/
-    /*height: 50%;*/
-    /*高さに関しては親要素のサイズを明示的に指定しないと期待通りに動作しない*/
-    /*  ここではbodyとhtmlのサイズを上で指定している*/
-
-    background-color: antiquewhite;
-
-    /*borderのプロパティを指定*/
-    /*border-color: orange;*/
-    /*border-width: 4px;*/
-    /*border-style: dotted;*/
-
-    /*一度に指定することも出来る*/
-    /*border: skyblue 10px double;*/
-
-    /*上の線だけ指定することも出来る*/
-    /*border-top: skyblue 10px double;*/
-
-    /*上下 左右*/
-    /*padding: 10px 50px;*/
-
-    /*上から時計回りに*/
-    padding: 10px 30px 50px 70px;
-}
-
-div#box1 {
-    margin: 10px 20px 30px;
-}
-
-div#box2 {
-    background-color: silver;
-    /*上のbox1との間はマージンの相殺が発生するため、20+30pxではなく大きい方のマージン30pxしか空かない*/
-    margin: 20px;
-}
+/*カーソル*/
 
 p {
-    color: silver;
-    font-size: 24px;
-    font-family: Arial;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: underline line-through overline;
-    /*デコレーションを取り消すプロパティ*/
-    /*text-decoration: none;*/
+    padding: 10px;
+    border: #777777 4px solid;
+}
 
+.help {cursor: help;}
+.dragme { cursor: move;}
+.clickme { cursor: pointer;}
+/*画像ファイル＋ファイルがなかったときに何を表示するかの指定(auto=default)*/
+.smile { cursor: url("smile.png"), auto; }
+
+/*body {*/
+    /*background-color: aliceblue;*/
+    /*background-image: url(bg.png);*/
+    /*!*background-repeat: repeat-x;*!*/
+    /*background-repeat: no-repeat;*/
+
+    /*!*background-position: 10px 10px;*!*/
+    /*background-position: top center;*/
+
+    /*!*background-attachment: scroll;*!*/
+    /*!*ウィンドウに対して固定（スクロールしても付いてくる）*!*/
+    /*background-attachment: fixed;*/
+/*}*/
+
+body {
+    background: url(bg.png)
+    no-repeat
+    10px 10px
+    fixed;
 }
