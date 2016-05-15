@@ -1,33 +1,25 @@
-/*カーソル*/
+/*
+display:
+- block
+- inline
+- list-item
+- inline-block
+- none
+*/
 
-p {
-    padding: 10px;
-    border: #777777 4px solid;
+h1, p, span, a {
+    border: 1px solid #ddd;
 }
 
-.help {cursor: help;}
-.dragme { cursor: move;}
-.clickme { cursor: pointer;}
-/*画像ファイル＋ファイルがなかったときに何を表示するかの指定(auto=default)*/
-.smile { cursor: url("smile.png"), auto; }
+h1, p {
+    /*h1 p もインライン要素のように横に配置する*/
+    /*display: inline;*/
+    display: inline-block;
+    /*inline要素の場合、幅と高さの設定は無視される*/
+    /*inline-blockにすると幅と高さの設定が有効になる*/
+    width: 180px;
 
-/*body {*/
-    /*background-color: aliceblue;*/
-    /*background-image: url(bg.png);*/
-    /*!*background-repeat: repeat-x;*!*/
-    /*background-repeat: no-repeat;*/
-
-    /*!*background-position: 10px 10px;*!*/
-    /*background-position: top center;*/
-
-    /*!*background-attachment: scroll;*!*/
-    /*!*ウィンドウに対して固定（スクロールしても付いてくる）*!*/
-    /*background-attachment: fixed;*/
-/*}*/
-
-body {
-    background: url(bg.png)
-    no-repeat
-    10px 10px
-    fixed;
 }
+
+/*非表示*/
+span { display: none; }
