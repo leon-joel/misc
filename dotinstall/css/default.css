@@ -1,25 +1,43 @@
 /*
-display:
-- block
-- inline
-- list-item
-- inline-block
-- none
+position:
+
+- static    デフォルト
+- relative  staticからの相対位置
+
+- fixed  ウィンドウの左上からの位置
+         スクロールに追従する
+         後続の要素の配置に影響を与えない（無視される）
+- absolute
+    親要素がstaticの場合:
+      ウィンドウ左上からの位置（スクロールに追従しない）
+    親要素がstatic以外の場合:
+      親要素の左上からの位置（スクロールに追従しない）
 */
 
-h1, p, span, a {
-    border: 1px solid #ddd;
+
+body  { margin: 0; }
+#box1 { width: 100px; height: 50px; }
+#box2 { width: 100px; height: 50px; }
+#box3 { width:  50px; height: 25px; }
+
+
+#box1 {
+    background: gray;
+    /*position: relative;*/
+    /*position: fixed;*/
+    /*top: 10px;*/
+    /*left: 10px;*/
 }
 
-h1, p {
-    /*h1 p もインライン要素のように横に配置する*/
-    /*display: inline;*/
-    display: inline-block;
-    /*inline要素の場合、幅と高さの設定は無視される*/
-    /*inline-blockにすると幅と高さの設定が有効になる*/
-    width: 180px;
-
+#box2 {
+    background: silver;
+    /*position: static;*/
+    position: relative;
 }
 
-/*非表示*/
-span { display: none; }
+#box3 {
+    background: orange;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
