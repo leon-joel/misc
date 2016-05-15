@@ -1,129 +1,29 @@
-/*
-セレクタ { プロパティ名: 値; }
-セレクタ {
-  プロパティ名: 値;
-  プロパティ名: 値;
+/* ボックスモデル */
+
+body, html { height: 100%; }
+
+body { margin: 0; }
+
+div {
+    /*width: 200px;*/
+    /*height: 100px;*/
+
+    /*親要素に対する相対サイズ*/
+    /*width: 50%;*/
+    /*height: 50%;*/
+    /*高さに関しては親要素のサイズを明示的に指定しないと期待通りに動作しない*/
+    /*  ここではbodyとhtmlのサイズを上で指定している*/
+
+    background-color: antiquewhite;
+
+    /*borderのプロパティを指定*/
+    /*border-color: orange;*/
+    /*border-width: 4px;*/
+    /*border-style: dotted;*/
+
+    /*一度に指定することも出来る*/
+    /*border: skyblue 10px double;*/
+
+    /*上の線だけ指定することも出来る*/
+    /*border-top: skyblue 10px double;*/
 }
-
-* ユニバーサルセレクタ
-
-要素名 … p h1 div
-
-#id
-
-.class
-*/
-
-
-/*すべてに適用されるセレクタ*/
-/* * { color: skyblue; }*/
-
-/*タグ*/
-h1 { color: skyblue; }
-
-/*ID*/
-#first { color: orange; }
-
-/*クラス*/
-.points { color: violet; }
-
-/*
-セレクタ
-a, b    両方に適用
-a b     a 配下の b に適用
-a > b   a 直下の b に適用
-a + b   a の次の b に適用
-a.class 指定classのaに適用
-a#id    指定のidのaに適用
-*/
-
-/*
-属性セレクタ
-*/
-
-/*title属性のあるaタグ*/
-/*a[title] { color: skyblue;}*/
-
-/*href属性の値が一致するaタグ*/
-/*a[href="http://google.com"] { color: orange;}*/
-
-/*class属性にsearchが含まれるaタグ*/
-/*a[class~="search"] { color: brown;}*/
-
-/*
-疑似クラス
-ある要素の【状態】を指定
-*/
-
-/*1番目の要素だけにスタイルを適用 CSS2.1で順番に関する疑似クラスはこれだけ*/
-ul li:first-child { color: skyblue; }
-
-/*未訪問*/
-/*a:link { color: violet; }*/
-/*訪問済み*/
-/*a:visited { color: orange; }*/
-/*ホバー*/
-/*a:hover { color: pink; }*/
-/*マウスダウン*/
-/*a:active { color: red; }*/
-
-/*フォーカス時*/
-input:focus { background: skyblue; }
-
-/*
-疑似要素
-ある要素の【一部】だけを指定
-*/
-
-/*1文字目*/
-p:first-letter { color: darkred; }
-/*1行目*/
-p:first-line { color: skyblue; }
-
-/*要素の前/後に付け加える*/
-p:before {
-    content: '--> ';}
-p:after {
-    content: ' <--';}
-
-/*
-セレクタの優先度を決める基準
-詳細度（上から順に優先度が高い）
-    (a) style=""
-    (b) id
-    (c) 属性・疑似クラス
-    (d) 要素・疑似要素
-*/
-
-/* 0 0 0 1*/
-a { color: red; }
-/*!importantを付けると最優先！乱用禁止！*/
-/*a { color: red !important;}*/
-
-/* 0 0 1 1*/
-/* クラスを追加したので、上のものより優先度が高くなる*/
-a.rarara { color: pink; }
-/* 0 0 1 1*/
-/* 同じ詳細度なら後勝ち*/
-a.search { color: orange; }
-
-/* 0 1 0 1*/
-a#site { color: blue; }
-
-
-/*
-値について
-*/
-/*長さ 絶対指定*/
-body { font-size: 22px;}
-/* 親要素に対する相対指定（倍率）*/
-/* 当該タグがおかれている場所によって絶対値は変わるということ*/
-h1 { font-size: 3em;}
-h2 { font-size: 200%;}
-
-/*色*/
-/*h1 { color: cyan;}*/
-/*h1 { color: #0000ff;}*/
-/*h1 { color: #00f;}*/
-/*h1 { color: rgb(0, 0, 128);}*/
-h1 { color: rgb(0%, 0%, 25%);}
