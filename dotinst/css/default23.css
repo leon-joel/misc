@@ -1,0 +1,22 @@
+/*
+float
+clear
+*/
+
+h1, h2, p, img {
+    border:1px solid #ddd;
+}
+
+img {
+    /*右寄せ*/
+    /*※親要素を飛び出す*/
+    /*※他のコンテンツはこれを回り込む*/
+    float: right;
+    /*描画が遅くならないようにwidthを付けておくこと！*/
+    width: 100px;
+}
+
+h2 {
+    /*右側にfloatを入り込ませない設定*/
+    clear: right;
+}
