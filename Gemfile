@@ -9,6 +9,7 @@ gem 'activesupport'
 gem 'monetize'
 
 gem 'test-unit'
+gem 'rspec'
 
 gem 'sqlite3'
 

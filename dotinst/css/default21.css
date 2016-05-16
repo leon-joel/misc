@@ -1,0 +1,44 @@
+/*
+z-index
+- position:staticの要素 には効かない
+- 値が大きいほど上に来る
+
+overflow
+  ブロック要素内のコンテンツがそのブロックの幅と高さを超えてしまう場合に
+  どのように表示するかの設定
+  visible … デフォルト。そのまま表示する＝はみ出して表示する
+  hidden  … はみ出した部分は表示しない
+  scroll  … スクロールバーを表示する
+*/
+
+body  { margin: 0; }
+#box1, #box2, #box3 {
+    width: 100px;
+    height: 50px;
+
+    /*位置を絶対値（ウィンドウ左上からの位置）*/
+    position: absolute;
+}
+
+#box1 {
+    background: gray;
+    top: 10px;
+    left: 10px;
+    z-index: 3;
+    /*overflow: hidden;*/
+    overflow: scroll;
+}
+
+#box2 {
+    background: silver;
+    top: 20px;
+    left: 20px;
+    z-index: 1;
+}
+
+#box3 {
+    background: orange;
+    top: 30px;
+    left: 30px;
+    z-index: 2;
+}
