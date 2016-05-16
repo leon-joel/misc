@@ -6,51 +6,45 @@
 
 */
 
-
 h1, h2, p, img {
-    border:1px solid #ddd;
+  border: 1px solid #ddd;
 }
 
 html {
-    font-size: 32px;
+  font-size: 32px;
 }
 
 body {
-    /*background-image: url("circle16.png");*/
+  /*background-image: url("circle16.png");*/
 
-    /*background-imageに透明度は効かない*/
-    /*opacity: 0.3;*/
+  /*background-imageに透明度は効かない*/
+  /*opacity: 0.3;*/
 }
 
 h1 {
-    /*font-size: 2em;*/
-    font-size: 2rem;
-    /*clear: both;*/
+  /*font-size: 2em;*/
+  font-size: 2rem;
+  /*clear: both;*/
 }
-
 
 span {
-    /*font-size: 0.5em;*/
-    /*  32px * 2 / 0.5 = 32px */
+  /*font-size: 0.5em;*/
+  /*  32px * 2 / 0.5 = 32px */
+  font-size:        1rem;
+  /*  32px * 1 = 32px */
 
-    font-size: 1rem;
-    /*  32px * 1 = 32px */
-
-    /*background-color: #fac3c6;*/
-
-    /* CSS3からhslでの指定や
-    alpha（透明度）も指定出来るようになった
-    0:透明   1:不透明*/
-    background-color: hsla(356, 84.622%, 87.3%, 0.3);
+  /*background-color: #fac3c6;*/
+  /* CSS3からhslでの指定や
+  alpha（透明度）も指定出来るようになった
+  0:透明   1:不透明*/
+  background-color: hsla(356, 84.622%, 87.3%, 0.3);
 }
 
-
-img .opa50{
-    /* オブジェクト全体を透明にする */
-    /* 0: 完全な透明  1:完全な不透明*/
-    opacity: 0.5;
+img .opa50 {
+  /* オブジェクト全体を透明にする */
+  /* 0: 完全な透明  1:完全な不透明*/
+  opacity: 0.5;
 }
-
 
 /*
 属性セレクタ
@@ -67,12 +61,14 @@ CSS3
 */
 
 p { font-size: 0.5rem; }
+
 a { font-size: 0.5rem; }
 
 a[href^="http"] { color: orange; }
-a[href$=".com"] { color: darkred; }
-a[href*="install"] { color: green; }
 
+a[href$=".com"] { color: darkred; }
+
+a[href*="install"] { color: green; }
 
 /*
 疑似クラス
@@ -88,9 +84,13 @@ CSS3
 
 */
 ul { font-size: 0.5rem; }
+
 li:last-child { color: red; }
+
 li:nth-child(odd) { font-style: italic; }
+
 li:nth-last-child(2) { font-family: "Arial Black"; }
+
 li:only-child { font-size: 1.5em; }
 
 /*
@@ -104,8 +104,11 @@ xxx-childと違い、「ドキュメント全体でn個目の要素」という�
 */
 
 section { font-size: 0.5rem; }
+
 p:first-of-type { color: red; }
+
 p:nth-of-type(3) { color: blue; }
+
 p:nth-last-of-type(2) { color: orange; }
 
 h2:only-of-type { color: violet; }
@@ -119,11 +122,13 @@ h2:only-of-type { color: violet; }
 */
 /*targetクラス【以外】を選択*/
 li:not(.target) { font-size: larger; }
+
 /*コンテンツが空*/
 li:empty { color: #99142a; }
 
 /*disabledを選択*/
 input[type="text"]:disabled { background: violet; }
+
 /*checkedを選択。但し、checkboxそのものではなく、隣接するlabelの背景色を変更している【隣接セレクタ】*/
 input[type="checkbox"]:checked + label { background: pink; }
 
@@ -131,31 +136,31 @@ input[type="checkbox"]:checked + label { background: pink; }
 border-radius
 */
 div#radius {
-    width: 150px;
-    height: 150px;
-    background: skyblue url("food.jpg");
+  width:         150px;
+  height:        150px;
+  background:    skyblue url("food.jpg");
 
-    /*角丸*/
-    /*border-radius: 20px;*/
+  /*角丸*/
+  /*border-radius: 20px;*/
 
-    /*楕円丸め（x方向y方向それぞれ指定*/
-    /*border-radius: 20px / 10px;*/
+  /*楕円丸め（x方向y方向それぞれ指定*/
+  /*border-radius: 20px / 10px;*/
 
-    /*角を指定*/
-    /*border-bottom-right-radius: 50px;*/
+  /*角を指定*/
+  /*border-bottom-right-radius: 50px;*/
 
-    /*まとめて指定*/
-    /* 2つ指定: 左上右下 と 右上左下*/
-    /*border-radius: 10px 50px;*/
-    /* 3つ指定: 左上  右上左下  右下*/
-    /*border-radius: 10px 50px 30px;*/
-    /* 4つ指定: 左上から時計回り*/
-    /*border-radius: 10px 50px 30px 100px;*/
+  /*まとめて指定*/
+  /* 2つ指定: 左上右下 と 右上左下*/
+  /*border-radius: 10px 50px;*/
+  /* 3つ指定: 左上  右上左下  右下*/
+  /*border-radius: 10px 50px 30px;*/
+  /* 4つ指定: 左上から時計回り*/
+  /*border-radius: 10px 50px 30px 100px;*/
 
-    /*割合で指定*/
-    /* 50%なら真円（楕円）になる*/
-    /* 画像を貼り付ければ、よくみるプロフィール画像表示のようになる*/
-    border-radius: 50%;
+  /*割合で指定*/
+  /* 50%なら真円（楕円）になる*/
+  /* 画像を貼り付ければ、よくみるプロフィール画像表示のようになる*/
+  border-radius: 50%;
 }
 
 /*
@@ -163,63 +168,125 @@ background-size
 */
 
 header#main {
-    width: 100%;
-    height: 223px;
-    background: url("animal.jpg") no-repeat skyblue;
+  width:           100%;
+  height:          223px;
+  background:      url("animal.jpg") no-repeat skyblue;
 
-    /*常に幅基準でstretchされる（縦横比は維持）*/
-    /*background-size: 50%;*/
+  /*常に幅基準でstretchされる（縦横比は維持）*/
+  /*background-size: 50%;*/
 
-    /*縦横両方指定（縦横比はもちろん維持されない）*/
-    /*background-size: 50% 100%;*/
+  /*縦横両方指定（縦横比はもちろん維持されない）*/
+  /*background-size: 50% 100%;*/
 
-    /*背景領域が常にカバーされる（裏のskyblueが見えることはない。画像が切り取られる。）*/
-    /*一般的なJumboTronはこれかな。
-    ウィンドウ幅によっては画像が相当切り取られるので、幅ごとに画像を切り替える、
-    もしくは画像自体の倍率？を変更するといったことをしないといけないようだ。*/
-    background-size: cover;
-
-    /*常に画像全体が表示される。裏のskyblueがほぼ常に見えている。
-    画像の色と背景色を合わせれば、JumboTronとしてつかえるか。https://www.remotty.net/*/
-    /*background-size: contain;*/
-    /*background-position: 50% 0%;*/
+  /*背景領域が常にカバーされる（裏のskyblueが見えることはない。画像が切り取られる。）*/
+  /*一般的なJumboTronはこれかな。
+  ウィンドウ幅によっては画像が相当切り取られるので、幅ごとに画像を切り替える、
+  もしくは画像自体の倍率？を変更するといったことをしないといけないようだ。*/
+  background-size: cover;
+  /*常に画像全体が表示される。裏のskyblueがほぼ常に見えている。
+  画像の色と背景色を合わせれば、JumboTronとしてつかえるか。https://www.remotty.net/*/
+  /*background-size: contain;*/
+  /*background-position: 50% 0%;*/
 }
 
 header#sub {
-    border:1px solid #ddd;
+  border: 1px solid #ddd;
+  width:  100%;
+  height: 100px;
 
-    width: 100%;
-    height: 100px;
+  /*ずらして2枚表示 ★後に書いたものほど下に表示される*/
+  /*background:*/
+  /*url("circle16.png") no-repeat 0 0,*/
+  /*url("food.jpg") no-repeat 5px 5px,*/
+  /*url("circle16.png") no-repeat bottom right*/
 
-    /*ずらして2枚表示 ★後に書いたものほど下に表示される*/
-    /*background:*/
-            /*url("circle16.png") no-repeat 0 0,*/
-            /*url("food.jpg") no-repeat 5px 5px,*/
-            /*url("circle16.png") no-repeat bottom right*/
-
-    /*background:*/
-            /*url("animal2.jpg") no-repeat,*/
-            /*url("animal.jpg") no-repeat top right;*/
-    /*background-size: contain;*/
+  /*background:*/
+  /*url("animal2.jpg") no-repeat,*/
+  /*url("animal.jpg") no-repeat top right;*/
+  /*background-size: contain;*/
 }
 
 .container {
-    display: table;
-    width: 100%;
-    height: 100%;
+  display: table;
+  width:   100%;
+  height:  100%;
 }
+
 .box-left {
-    border:1px solid #f00;
-    background: url("animal2.jpg") no-repeat top left;
-    background-size: cover;
+  border:          1px solid #f00;
+  background:      url("animal2.jpg") no-repeat top left;
+  background-size: cover;
 }
+
 .box-right {
-    border:1px solid #00f;
-    background: url("animal.jpg") no-repeat bottom right;
-    background-size: cover;
+  border:          1px solid #00f;
+  background:      url("animal.jpg") no-repeat bottom right;
+  background-size: cover;
 }
+
 .box50 {
-    display: table-cell;
-    width: 50%;
-    /*height: 100px;*/
+  display: table-cell;
+  width:   50%;
+  /*height: 100px;*/
+}
+
+div#linear-grad {
+  width:            200px;
+  height:           200px;
+  /* 上から下に */
+  /*background-image: linear-gradient(skyblue, blue);*/
+  /* 方向指定 */
+  /*background-image: linear-gradient(to top left, skyblue, blue);*/
+  /* 角度指定 真上0度～時計回り*/
+  /*background-image: linear-gradient(45deg, skyblue, blue);*/
+  /* 3つ以上の色を指定できる */
+  /*background-image: linear-gradient(lightgreen, skyblue, blue);*/
+  /* 色の場所を指定*/
+  /*background-image: linear-gradient(lightgreen 10%, skyblue 70%, blue);*/
+
+  /* 繰り返しのグラデーション*/
+  background-image: repeating-linear-gradient(lightgreen, skyblue 20px);
+}
+
+div#radial-grad {
+  width:  200px;
+  height: 200px;
+
+  /*円形のグラデーション*/
+  /*background-image: radial-gradient(skyblue, blue);*/
+
+  /*中心位置を指定*/
+  /*background-image: radial-gradient(at left top, skyblue, blue);*/
+  /*background-image: radial-gradient(at 30px 50px, skyblue, blue);*/
+
+  /*グラデーション範囲を指定*/
+  /*background-image: radial-gradient(10% 40px at 30px 50px, skyblue, blue);*/
+  /*background-image: radial-gradient(circle 40px at 30px 50px, skyblue, blue);*/
+  /*background-image: radial-gradient(farthest-side at 30px 100px, skyblue, blue);*/
+  /*background-image: radial-gradient(closest-corner at 30px 100px, skyblue, blue);*/
+  background-image: repeating-radial-gradient(at 30px 100px, skyblue, blue 20px);
+}
+
+/*Shadow*/
+div#b-shadow {
+  width: 200px;
+  height: 100px;
+  border-radius: 2px;
+
+  background: #eee;
+  /* x方向, y方向, 色 */
+  /*box-shadow: 10px 20px rgba(0, 0, 0, .4);*/
+  /* x方向, y方向, ぼかしの長さ、影を大きくする/小さくする、色 */
+  /*box-shadow: 10px 20px 4px 10px rgba(0, 0, 0, .4);*/
+  /* ちょっとズルい四角？ */
+  /*box-shadow: 0px 0px 4px rgba(0, 0, 0, .8);*/
+  /* 内側に影を ＋ 外側にも影を*/
+  box-shadow: 10px 20px 4px 10px rgba(0, 0, 0, .4) inset,
+              10px 20px 4px 10px rgba(0, 0, 128, .4);
+}
+
+h1#t-shadow {
+  /* box-shadowとの違いは*/
+  /* 4番目の引数がない。insetが出来ない。*/
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, .4);
 }
