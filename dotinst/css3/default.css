@@ -25,6 +25,7 @@ body {
 h1 {
     /*font-size: 2em;*/
     font-size: 2rem;
+    /*clear: both;*/
 }
 
 
@@ -44,7 +45,7 @@ span {
 }
 
 
-img {
+img .opa50{
     /* オブジェクト全体を透明にする */
     /* 0: 完全な透明  1:完全な不透明*/
     opacity: 0.5;
@@ -185,6 +186,8 @@ header#main {
 }
 
 header#sub {
+    border:1px solid #ddd;
+
     width: 100%;
     height: 100px;
 
@@ -194,10 +197,29 @@ header#sub {
             /*url("food.jpg") no-repeat 5px 5px,*/
             /*url("circle16.png") no-repeat bottom right*/
 
-    background:
-            url("animal2.jpg") no-repeat,
-            url("animal.jpg") no-repeat top right;
-    background-size: contain;
-;
+    /*background:*/
+            /*url("animal2.jpg") no-repeat,*/
+            /*url("animal.jpg") no-repeat top right;*/
+    /*background-size: contain;*/
+}
 
+.container {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+.box-left {
+    border:1px solid #f00;
+    background: url("animal2.jpg") no-repeat top left;
+    background-size: cover;
+}
+.box-right {
+    border:1px solid #00f;
+    background: url("animal.jpg") no-repeat bottom right;
+    background-size: cover;
+}
+.box50 {
+    display: table-cell;
+    width: 50%;
+    /*height: 100px;*/
 }
