@@ -1,0 +1,31 @@
+/*
+line-height 行の高さ（行ボックスの高さ）
+vertical-align インラインレベル要素の縦位置を指定
+*/
+
+p {
+    border: 1px solid #ddd;
+    font-size: 72px;
+
+    /*line-height: 24px;*/
+    line-height: 1.5;    /* フォントサイズに対する相対倍率 （推奨）*/
+
+
+}
+
+img {
+    /*親要素のフォントのBaseline（英子文字aoなどの下のライン）に揃える（デフォルト）*/
+    /*vertical-align: baseline;*/
+
+    /*行ボックスの底*/
+    /*vertical-align: bottom;*/
+
+    /*行ボックスの天井*/
+    /*vertical-align: top;*/
+
+    /*親要素のフォント英子文字aoなどの中央に揃える*/
+    vertical-align: middle;
+
+    /*その他にも色々あるようだ*/
+
+}
