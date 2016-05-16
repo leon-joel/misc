@@ -1,0 +1,112 @@
+/*長さ
+
+ - em は親要素に対する相対サイズだったが、入り組んでくると分かりづらいという問題もある。
+
+ - rem はROOT要素（html）に指定されているサイズに対する相対サイズで指定出来る。
+
+*/
+
+h1, h2, p, img {
+  /*border: 1px solid #ddd;*/
+}
+
+
+/*
+属性セレクタ
+CSS2.1
+  a[href]
+  a[href="foo"]
+  a[href~="foo"]  fooを含む ※"foo bar"という属性値の場合に合致するが、
+                              "foobar"には合致しない。
+
+CSS3
+  a[href^="foo"]  fooから始まる
+  a[href$="foo"]  fooで終わる
+  a[href*="foo"]  fooを含むZ
+*/
+
+/*
+疑似クラス
+CSS2.1
+  :first-child
+CSS3
+  :last-child
+  :nth-child(n)
+  :nth-child(odd/even)
+  :nth-child(3n+1)のような式で表現
+  :nth-last-child(...)
+  :only-child
+
+*/
+
+/*
+疑似クラス
+xxx-childと違い、「ドキュメント全体でn個目の要素」という指定
+  :first-of-type
+  :last-of-type
+  :nth-of-type(...)
+  :nth-last-of-type
+  :only-of-type
+*/
+
+/*
+疑似クラス
+  :not(.target)
+  :empty
+  :enabled/disabled
+  :checked
+*/
+
+body {
+  margin: 20px;
+  background-color: lightgreen;
+}
+article > h2 {
+  border: pink 2px solid;
+  padding: 4px;
+
+
+}
+
+.container {
+  display: table;
+  width:   100%;
+  height:  100%;
+}
+
+.box {
+  display: table-cell;
+  /*margin: 10px 10px 10px 10px;*/
+  /*height: 100px;*/
+}
+
+div.box + div.box {
+}
+
+#left {
+  float: left;
+  margin-right: 15px;
+  width: 150px;
+  background: forestgreen;
+  /*padding: 0;*/
+}
+
+#left > ul {
+  /*box-sizing: border-box;*/
+  color: white;
+  /*margin: 0 0 0 -6px;*/
+}
+
+#right {
+  /*float: left;*/
+  /*width: 300px;*/
+  padding: 10px;
+  /*margin: 10px;*/
+  background: whitesmoke;
+}
+
+.clearfix::after {
+  content: '';
+  display: block;
+  clear: both;
+}
