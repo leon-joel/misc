@@ -1,0 +1,31 @@
+/*
+display: table
+*/
+
+body { margin: 0;}
+
+.container#full {
+    display: table;
+    width: 100%;
+}
+.box50 {
+    display: table-cell;
+    width: 50%;
+}
+
+
+.container {
+    display: table;
+    width: 300px;
+}
+.box {
+    display: table-cell;
+    width: 100px;
+}
+
+.row {
+    display: table-row;
+}
+.gray { background: gray; }
+.silver { background: silver; }
+.orange { background: orange; }
