@@ -1,0 +1,203 @@
+/*長さ
+
+ - em は親要素に対する相対サイズだったが、入り組んでくると分かりづらいという問題もある。
+
+ - rem はROOT要素（html）に指定されているサイズに対する相対サイズで指定出来る。
+
+*/
+
+
+h1, h2, p, img {
+    border:1px solid #ddd;
+}
+
+html {
+    font-size: 32px;
+}
+
+body {
+    /*background-image: url("circle16.png");*/
+
+    /*background-imageに透明度は効かない*/
+    /*opacity: 0.3;*/
+}
+
+h1 {
+    /*font-size: 2em;*/
+    font-size: 2rem;
+}
+
+
+span {
+    /*font-size: 0.5em;*/
+    /*  32px * 2 / 0.5 = 32px */
+
+    font-size: 1rem;
+    /*  32px * 1 = 32px */
+
+    /*background-color: #fac3c6;*/
+
+    /* CSS3からhslでの指定や
+    alpha（透明度）も指定出来るようになった
+    0:透明   1:不透明*/
+    background-color: hsla(356, 84.622%, 87.3%, 0.3);
+}
+
+
+img {
+    /* オブジェクト全体を透明にする */
+    /* 0: 完全な透明  1:完全な不透明*/
+    opacity: 0.5;
+}
+
+
+/*
+属性セレクタ
+CSS2.1
+  a[href]
+  a[href="foo"]
+  a[href~="foo"]  fooを含む ※"foo bar"という属性値の場合に合致するが、
+                              "foobar"には合致しない。
+
+CSS3
+  a[href^="foo"]  fooから始まる
+  a[href$="foo"]  fooで終わる
+  a[href*="foo"]  fooを含むZ
+*/
+
+p { font-size: 0.5rem; }
+a { font-size: 0.5rem; }
+
+a[href^="http"] { color: orange; }
+a[href$=".com"] { color: darkred; }
+a[href*="install"] { color: green; }
+
+
+/*
+疑似クラス
+CSS2.1
+  :first-child
+CSS3
+  :last-child
+  :nth-child(n)
+  :nth-child(odd/even)
+  :nth-child(3n+1)のような式で表現
+  :nth-last-child(...)
+  :only-child
+
+*/
+ul { font-size: 0.5rem; }
+li:last-child { color: red; }
+li:nth-child(odd) { font-style: italic; }
+li:nth-last-child(2) { font-family: "Arial Black"; }
+li:only-child { font-size: 1.5em; }
+
+/*
+疑似クラス
+xxx-childと違い、「ドキュメント全体でn個目の要素」という指定
+  :first-of-type
+  :last-of-type
+  :nth-of-type(...)
+  :nth-last-of-type
+  :only-of-type
+*/
+
+section { font-size: 0.5rem; }
+p:first-of-type { color: red; }
+p:nth-of-type(3) { color: blue; }
+p:nth-last-of-type(2) { color: orange; }
+
+h2:only-of-type { color: violet; }
+
+/*
+疑似クラス
+  :not(.target)
+  :empty
+  :enabled/disabled
+  :checked
+*/
+/*targetクラス【以外】を選択*/
+li:not(.target) { font-size: larger; }
+/*コンテンツが空*/
+li:empty { color: #99142a; }
+
+/*disabledを選択*/
+input[type="text"]:disabled { background: violet; }
+/*checkedを選択。但し、checkboxそのものではなく、隣接するlabelの背景色を変更している【隣接セレクタ】*/
+input[type="checkbox"]:checked + label { background: pink; }
+
+/*
+border-radius
+*/
+div#radius {
+    width: 150px;
+    height: 150px;
+    background: skyblue url("food.jpg");
+
+    /*角丸*/
+    /*border-radius: 20px;*/
+
+    /*楕円丸め（x方向y方向それぞれ指定*/
+    /*border-radius: 20px / 10px;*/
+
+    /*角を指定*/
+    /*border-bottom-right-radius: 50px;*/
+
+    /*まとめて指定*/
+    /* 2つ指定: 左上右下 と 右上左下*/
+    /*border-radius: 10px 50px;*/
+    /* 3つ指定: 左上  右上左下  右下*/
+    /*border-radius: 10px 50px 30px;*/
+    /* 4つ指定: 左上から時計回り*/
+    /*border-radius: 10px 50px 30px 100px;*/
+
+    /*割合で指定*/
+    /* 50%なら真円（楕円）になる*/
+    /* 画像を貼り付ければ、よくみるプロフィール画像表示のようになる*/
+    border-radius: 50%;
+}
+
+/*
+background-size
+*/
+
+header#main {
+    width: 100%;
+    height: 223px;
+    background: url("animal.jpg") no-repeat skyblue;
+
+    /*常に幅基準でstretchされる（縦横比は維持）*/
+    /*background-size: 50%;*/
+
+    /*縦横両方指定（縦横比はもちろん維持されない）*/
+    /*background-size: 50% 100%;*/
+
+    /*背景領域が常にカバーされる（裏のskyblueが見えることはない。画像が切り取られる。）*/
+    /*一般的なJumboTronはこれかな。
+    ウィンドウ幅によっては画像が相当切り取られるので、幅ごとに画像を切り替える、
+    もしくは画像自体の倍率？を変更するといったことをしないといけないようだ。*/
+    background-size: cover;
+
+    /*常に画像全体が表示される。裏のskyblueがほぼ常に見えている。
+    画像の色と背景色を合わせれば、JumboTronとしてつかえるか。https://www.remotty.net/*/
+    /*background-size: contain;*/
+    /*background-position: 50% 0%;*/
+}
+
+header#sub {
+    width: 100%;
+    height: 100px;
+
+    /*ずらして2枚表示 ★後に書いたものほど下に表示される*/
+    /*background:*/
+            /*url("circle16.png") no-repeat 0 0,*/
+            /*url("food.jpg") no-repeat 5px 5px,*/
+            /*url("circle16.png") no-repeat bottom right*/
+
+    background:
+            url("animal2.jpg") no-repeat,
+            url("animal.jpg") no-repeat top right;
+    background-size: contain;
+;
+
+}
