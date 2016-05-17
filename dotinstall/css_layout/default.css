@@ -1,0 +1,30 @@
+
+
+body {
+  background: slategray;
+}
+
+#eyecatch {
+  background: url('animal.jpg') no-repeat;
+  background-size: cover;
+  background-position: 60% 60%;
+  height: 100px;
+}
+
+.container {
+  width: 500px;
+  margin: 0 auto;
+
+  /*background: pink;*/
+}
+
+header {
+  background: tomato;
+}
+
+main {
+  background: skyblue;
+}
+
+footer {
+}
