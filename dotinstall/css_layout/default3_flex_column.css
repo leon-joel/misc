@@ -1,0 +1,67 @@
+
+
+body {
+}
+
+.container {
+  width: 500px;
+  margin: 0 auto;
+
+  /*background: pink;*/
+}
+
+header {
+  background: tomato;
+}
+
+main {
+  background: skyblue;
+}
+
+#left, #center, #right {
+  /*padding: 10px;*/
+
+  /*width/height指定が「borderやpaddingも含んだ長さ」として扱われる*/
+  /*つまり、「paddingやborderの値を変えても、レイアウト全体には影響しない」というメリットがある*/
+  /*注意！ marginを変えたらレイアウトは崩れる。marginは外側の値なので、border-boxでは吸収しない。*/
+  box-sizing: border-box;
+}
+
+#left {
+  background: limegreen;
+  float: left;
+  width: 100px;
+  /*margin-right: 10px;*/
+}
+
+#center {
+  background: seagreen;
+  /*float: left;*/
+  /*width: 60%;*/
+  margin: 0 100px;
+}
+
+#right {
+  background: lightgreen;
+  float: right;
+  width: 100px;
+}
+
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+
+  /*古いブラウザに対応するためにはもう少し色々書かないといけないらしい*/
+}
+
+/*clearfixより簡単で同じ効果が得られる方法*/
+/* http://coliss.com/articles/build-websites/operation/css/css-clearing-floats-with-overflow-by-webdesignerwall.html */
+.clear {
+  overflow: hidden;
+}
+
+footer {
+  background: slategray;
+  clear: both;
+}
