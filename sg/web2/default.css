@@ -1,11 +1,3 @@
-/*長さ
-
- - em は親要素に対する相対サイズだったが、入り組んでくると分かりづらいという問題もある。
-
- - rem はROOT要素（html）に指定されているサイズに対する相対サイズで指定出来る。
-
-*/
-
 h1, h2, p, img {
   /*border: 1px solid #ddd;*/
 }
@@ -61,52 +53,83 @@ body {
   margin: 20px;
   background-color: lightgreen;
 }
-article > h2 {
+
+
+h2 {
   border: pink 2px solid;
   padding: 4px;
-
-
 }
 
 .container {
-  display: table;
+  /*display: table;*/
   width:   100%;
-  height:  100%;
+  /*height:  100%;*/
+  margin: 0 auto;
 }
 
 .box {
-  display: table-cell;
+  /*display: table-cell;*/
   /*margin: 10px 10px 10px 10px;*/
   /*height: 100px;*/
+
+  /*width/height指定が「borderやpaddingも含んだ長さ」として扱われる*/
+  /*つまり、「paddingやborderの値を変えても、レイアウト全体には影響しない」というメリットがある*/
+  /*注意！ marginを変えたらレイアウトは崩れる。marginは外側の値なので、border-boxでは吸収しない。*/
+  box-sizing: border-box;
 }
 
-div.box + div.box {
-}
-
-#left {
+#left-side {
   float: left;
-  margin-right: 15px;
+  /*margin-right: 15px;*/
   width: 150px;
   background: forestgreen;
   /*padding: 0;*/
 }
 
-#left > ul {
+#left-side > ul {
   /*box-sizing: border-box;*/
   color: white;
-  /*margin: 0 0 0 -6px;*/
+  margin: 10px 5px 10px -5px;
 }
 
-#right {
-  /*float: left;*/
+#left-side a {
+  text-decoration: none;
+}
+
+#left-side a:link { color: white; }
+#left-side a:visited { color: white; }
+
+#main {
+  /*float: right;*/
   /*width: 300px;*/
-  padding: 10px;
-  /*margin: 10px;*/
+  padding: 15px;
+  margin-left: 160px;
   background: whitesmoke;
 }
 
-.clearfix::after {
-  content: '';
-  display: block;
-  clear: both;
+article > h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+article > p {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+
+/*article > p:first-child {*/
+  /*margin-top: 5px;*/
+/*}*/
+/*article > p:last-child {*/
+  /*margin-bottom: 0;*/
+/*}*/
+/*.clearfix:after {*/
+  /*content: '';*/
+  /*display: block;*/
+  /*clear: both;*/
+/*}*/
+
+.clear {
+  overflow: hidden;
 }
