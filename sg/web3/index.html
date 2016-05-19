@@ -64,6 +64,15 @@
           </article>
         </div>
       </div>
+
+      <div id="back-to-top" style="position: fixed; right: 5px; bottom: 30px;">
+        <a href="#">↑Go To Top</a>
+      </div>
+      <div id="go-to-bottom" style="position: fixed; right: 5px; bottom: 10px;">
+        <a href="#">↓Go To Bottom</a>
+      </div>
+      <div id="pos" style="position: fixed; left: 5px; bottom: 5px;"></div>
+
     </main>
 
     <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
@@ -73,6 +82,46 @@
           $(this).toggleClass('on');
           $('#sub-nav .nav-menu').toggle('fast');
         });
+
+        // #back-to-topを消す
+//        $('#back-to-top').hide();
+
+        // スクロールが十分されたら back-to-topを表示。
+        // スクロールが戻ったら非表示
+//        $(window).scroll(function () {
+//          $('#pos').text($(this).scrollTop() + '|' + $('body').height() + '|' + $('html').height());
+
+          // こちらはちゃんと動く
+//          if (100 < $(this).scrollTop()) {
+//            $('#back-to-top').fadeIn();
+//          }else{
+//            $('#back-to-top').fadeOut();
+//          }
+
+          // 期待通りに動かない
+//          if ($(this).scrollTop() < $('body,html').height()) {
+//            $('#go-to-bottom').fadeIn();
+//          }else{
+//            $('#go-to-bottom').fadeOut();
+//          }
+//        });
+
+        // back-to-topがクリックされたら上に戻る
+        $('#back-to-top a').click(function () {
+          $('body,html').animate({
+            scrollTop: 0
+          }, 500);  // 500ms
+          return false;
+        })
+
+        $('#go-to-bottom a').click(function () {
+          $('body,html').animate({
+            scrollTop: $('body,html').height()
+          }, 500);  // 500ms
+          return false;
+        })
+
+
       });
     </script>
   </body>
