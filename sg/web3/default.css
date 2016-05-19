@@ -1,0 +1,161 @@
+h1, h2, p, img {
+  /*border: 1px solid #ddd;*/
+}
+
+
+/*
+属性セレクタ
+CSS2.1
+  a[href]
+  a[href="foo"]
+  a[href~="foo"]  fooを含む ※"foo bar"という属性値の場合に合致するが、
+                              "foobar"には合致しない。
+
+CSS3
+  a[href^="foo"]  fooから始まる
+  a[href$="foo"]  fooで終わる
+  a[href*="foo"]  fooを含むZ
+*/
+
+/*
+疑似クラス
+CSS2.1
+  :first-child
+CSS3
+  :last-child
+  :nth-child(n)
+  :nth-child(odd/even)
+  :nth-child(3n+1)のような式で表現
+  :nth-last-child(...)
+  :only-child
+
+*/
+
+/*
+疑似クラス
+xxx-childと違い、「ドキュメント全体でn個目の要素」という指定
+  :first-of-type
+  :last-of-type
+  :nth-of-type(...)
+  :nth-last-of-type
+  :only-of-type
+*/
+
+/*
+疑似クラス
+  :not(.target)
+  :empty
+  :enabled/disabled
+  :checked
+*/
+
+body {
+  /*margin: 20px;*/
+  background-color: lightgreen;
+}
+
+hr {
+  border-color: #cccccc;
+  border-style: solid;
+  border-width: thin;
+}
+
+.nav-menu {
+  list-style: none;
+  margin: 0;
+}
+.nav-menu > li {
+  float: left;
+  margin: 0 5px 0 5px;
+}
+
+#sub-nav {
+  height: 30px;
+  margin-top: 10px;
+}
+
+button {
+  cursor: pointer;
+}
+
+main {
+  margin: 15px;
+}
+
+h2 {
+  border: pink 2px solid;
+  padding: 4px;
+}
+
+.container {
+  /*display: table;*/
+  width:   100%;
+  /*height:  100%;*/
+  margin: 0 auto;
+}
+
+.box {
+  /*display: table-cell;*/
+  /*margin: 10px 10px 10px 10px;*/
+  /*height: 100px;*/
+
+  /*width/height指定が「borderやpaddingも含んだ長さ」として扱われる*/
+  /*つまり、「paddingやborderの値を変えても、レイアウト全体には影響しない」というメリットがある*/
+  /*注意！ marginを変えたらレイアウトは崩れる。marginは外側の値なので、border-boxでは吸収しない。*/
+  box-sizing: border-box;
+}
+
+#left-side {
+  float: left;
+  /*margin-right: 15px;*/
+  width: 150px;
+  background: forestgreen;
+  /*padding: 0;*/
+}
+
+#left-side > ul {
+  /*box-sizing: border-box;*/
+  color: white;
+  margin: 10px 5px 10px -5px;
+}
+
+#left-side a {
+  text-decoration: none;
+}
+
+#left-side a:link { color: white; }
+#left-side a:visited { color: white; }
+
+#main {
+  /*float: right;*/
+  /*width: 300px;*/
+  padding: 15px;
+  margin-left: 160px;
+  background: whitesmoke;
+}
+
+article > h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+article > p {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+
+
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+
+  /*古いブラウザに対応するためにはもう少し色々書かないといけないらしい*/
+}
+
+/*clearfixより簡単で同じ効果が得られる方法*/
+/* http://coliss.com/articles/build-websites/operation/css/css-clearing-floats-with-overflow-by-webdesignerwall.html */
+.clear {
+  overflow: hidden;
+}

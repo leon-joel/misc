@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>About programming languages</title>
+    <link rel="stylesheet" href="normalize.css">
+    <!--<link rel="stylesheet" href="reset.css">-->
+    <link rel="stylesheet" href="default.css">
+  </head>
+  <body>
+    <header class="clear">
+      <h1>About programming languages</h1>
+
+      <nav class="clear">
+        <ul class="nav-menu">
+          <li><a href="ウェブ"></a></li>
+          <li><a href="">ニュース</a></li>
+          <li><a href="">ショッピング</a></li>
+          <li><a href="">地図</a></li>
+          <li><a href="">画像</a></li>
+          <li><a href="">もっと見る</a></li>
+          <li><button id="btnTool">検索ツール</button></li>
+        </ul>
+      </nav>
+      <hr>
+
+      <nav id="sub-nav">
+        <ul class="nav-menu">
+          <li>約 670,000 件（0.23秒）</li>
+        </ul>
+        <ul class="nav-menu" style="display: none;">
+          <li><a href="#">すべての言語</a></li>
+          <li><a href="#">期間指定なし</a></li>
+          <li><a href="#">全ての結果</a></li>
+          <li><a href="#">この場所の付近を検索</a></li>
+        </ul>
+      </nav>
+
+    </header>
+
+    <main>
+      <div class="clear">
+        <div class="box"
+             id="left-side">
+          <ul>
+            <li><a href="">Ruby</a></li>
+            <li><a href="">Java</a></li>
+            <li><a href="">C#</a></li>
+            <li><a href="">Objective-C</a></li>
+            <li><a href="">JavaScript</a></li>
+          </ul>
+        </div>
+        <div class="box"
+             id="main">
+          <article>
+            <h2>What is Ruby?</h2>
+            <!--test-->
+            <p>Lorem ipsum dolor sit amet, consectetur adipsicing elit.Lorem ipsum dolor sit amet, consectetur adipsicing elit. Lorem ipsum dolor sit amet, consectetur adipsicing elit.Lorem ipsum dolor sit amet, consectetur adipsicing elit. Lorem ipsum dolor sit amet, consectetur adipsicing elit.Lorem ipsum dolor sit amet, consectetur adipsicing elit. Lorem ipsum dolor sit amet, consectetur adipsicing elit.Lorem ipsum dolor sit amet, consectetur adipsicing elit. Lorem ipsum dolor sit amet, consectetur adipsicing elit.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipsicing elit.Lorem ipsum dolor sit amet, consectetur adipsicing elit. Lorem ipsum dolor sit amet, consectetur adipsicing elit.Lorem ipsum dolor sit amet, consectetur adipsicing elit. Lorem ipsum dolor sit amet, consectetur adipsicing elit.Lorem ipsum dolor sit amet, consectetur adipsicing elit. Lorem ipsum dolor sit amet, consectetur adipsicing elit.Lorem ipsum dolor sit amet, consectetur adipsicing elit. Lorem ipsum dolor sit amet, consectetur adipsicing elit.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipsicing elit.Lorem ipsum dolor sit amet, consectetur adipsicing elit. Lorem ipsum dolor sit amet, consectetur adipsicing elit.Lorem ipsum dolor sit amet, consectetur adipsicing elit. Lorem ipsum dolor sit amet, consectetur adipsicing elit.Lorem ipsum dolor sit amet, consectetur adipsicing elit. Lorem ipsum dolor sit amet, consectetur adipsicing elit.Lorem ipsum dolor sit amet, consectetur adipsicing elit. Lorem ipsum dolor sit amet, consectetur adipsicing elit.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipsicing elit.Lorem ipsum dolor sit amet, consectetur adipsicing elit. Lorem ipsum dolor sit amet, consectetur adipsicing elit.Lorem ipsum dolor sit amet, consectetur adipsicing elit. Lorem ipsum dolor sit amet, consectetur adipsicing elit.Lorem ipsum dolor sit amet, consectetur adipsicing elit. Lorem ipsum dolor sit amet, consectetur adipsicing elit.Lorem ipsum dolor sit amet, consectetur adipsicing elit. Lorem ipsum dolor sit amet, consectetur adipsicing elit.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipsicing elit.Lorem ipsum dolor sit amet, consectetur adipsicing elit. Lorem ipsum dolor sit amet, consectetur adipsicing elit.Lorem ipsum dolor sit amet, consectetur adipsicing elit. Lorem ipsum dolor sit amet, consectetur adipsicing elit.Lorem ipsum dolor sit amet, consectetur adipsicing elit. Lorem ipsum dolor sit amet, consectetur adipsicing elit.Lorem ipsum dolor sit amet, consectetur adipsicing elit. Lorem ipsum dolor sit amet, consectetur adipsicing elit.</p>
+            <!--test-->
+          </article>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script>
+      $(function() {
+        $('#btnTool').click(function() {
+          $(this).toggleClass('on');
+          $('#sub-nav .nav-menu').toggle('fast');
+        });
+      });
+    </script>
+  </body>
+</html>
+
