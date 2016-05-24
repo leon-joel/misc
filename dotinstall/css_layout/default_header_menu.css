@@ -1,0 +1,85 @@
+
+
+body {
+}
+
+.container {
+  width: 500px;
+  margin: 0 auto;
+
+  /*background: pink;*/
+}
+
+header {
+  background: tomato;
+}
+
+ul#menu {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  font-size: 0;     /* これを入れないと、menuの間に隙間が出来てしまう */
+}
+
+ul#menu > li {
+  display: inline-block;
+}
+
+ul#menu > li > a {
+  display: inline-block;;
+  width: 80px;
+  height: 40px;
+  background: orange;
+  font-size: 16px;  /* これを入れないと、menuの間に隙間が出来てしまう */
+  text-decoration: none;  /* メニューなのでlinkの下線を表示しない */
+  text-align: center;     /* 左右真ん中にテキストを配置 */
+  line-height: 40px;      /* heightとそろえることによってテキストを上下中央に合わせる */
+}
+
+ul#menu > li > a:hover {
+  opacity: 0.5;     /* マウス来たときに半透明で表示する */
+  transition: 0.8s; /* じんわり表示が変わるように */
+}
+
+main {
+  background: skyblue;
+}
+
+#left, #right {
+  padding: 10px;
+
+  /*width/height指定が「borderやpaddingも含んだ長さ」として扱われる*/
+  /*つまり、「paddingやborderの値を変えても、レイアウト全体には影響しない」というメリットがある*/
+  box-sizing: border-box;
+}
+
+#left {
+  background: limegreen;
+  float: left;
+  width: 180px;
+}
+
+#right {
+  background: lightgreen;
+  float: right;
+  width: 300px;
+}
+
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+
+  /*古いブラウザに対応するためにはもう少し色々書かないといけないらしい*/
+}
+
+/*clearfixより簡単で同じ効果が得られる方法*/
+/* http://coliss.com/articles/build-websites/operation/css/css-clearing-floats-with-overflow-by-webdesignerwall.html */
+.clear {
+  overflow: hidden;
+}
+
+footer {
+  background: slategray;
+  clear: both;
+}

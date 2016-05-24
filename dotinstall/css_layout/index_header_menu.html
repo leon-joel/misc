@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>CSS Layout Practice</title>
+  <link rel="stylesheet" href="normalize.css">
+  <!--<link rel="stylesheet" href="reset.css">-->
+  <link rel="stylesheet" href="default_header_menu.css">
+</head>
+
+<body>
+<header>
+  <div class="container">
+    <ul id="menu">
+      <li><a href="">Menu1</a></li>
+      <li><a href="">Menu2</a></li>
+      <li><a href="">Menu3</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <!--<div class="container clearfix">-->
+  <div class="container clear">
+    <div id="left">
+      Left
+      <p>123</p>
+    </div>
+    <div id="right">
+      <h2>Right Title</h2>
+      Right
+      <p>123</p>
+      <p>566</p>
+      <p>678</p>
+
+    </div>
+  </div>
+
+  <!--left/rightの下にclear:bothのダミー要素を置くことで、-->
+  <!--main要素の高さが出るので、背景色が期待通りに表示される。-->
+  <!--※これ以外はfloat要素のみなので、main要素が高さ0となってしまう。-->
+  <!--<div style="clear:both;"></div>-->
+  <!--★ただ、これは分かりにくく面倒なので、clearfixという方法を使って同じ事を実現する-->
+
+</main>
+
+<footer>
+  <div class="container">
+    Footer
+  </div>
+</footer>
+
+</body>
+</html>
+
