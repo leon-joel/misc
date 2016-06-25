@@ -1,0 +1,23 @@
+@charset "UTF-8";
+/*
+  Comments to CSS
+  ここのコメントはCSS側に残ります
+*/
+#main {
+  width: 90%;
+  background: url("../img/bg.png");
+}
+#main p {
+  font-size: 16px;
+}
+#main p a {
+  text-decoration: none;
+}
+#main p a:hover {
+  font-weight: 14px;
+}
+#main p .sub {
+  font-size: 12px;
+}
+
+/*# sourceMappingURL=main.css.map */
