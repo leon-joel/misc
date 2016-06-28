@@ -19,7 +19,8 @@ gem 'simplecov'
 # Windowsでは動かない
 # gem 'stackprof'
 
-gem 'ruby-prof'
+# ruby2.3にした時にDevKitを入れろといわれた。面倒なのでとりあえず外しておく。
+# gem 'ruby-prof'
 
 gem 'memory_profiler'
 
