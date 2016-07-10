@@ -1,0 +1,10 @@
+// これはUTF-8のファイルです
+
+// カラム幅を計算
+@function getColumnWidth($width, $count) {
+	// 関数内変数は外では使えない
+	$padding: 10px;
+	$columnWidth: floor(($width - ($padding * ($count - 1))) / $count);
+	@debug $columnWidth;	// 変換時に出力される
+	@return $columnWidth;
+}

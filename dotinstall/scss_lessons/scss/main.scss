@@ -1,0 +1,159 @@
+// これはUTF-8のファイルです
+
+// scss -> css conversion
+//   sass --style expanded -E utf-8 scss\main.scss:css\main.css
+//   ※-Eでencodingを指定。cssファイルの先頭に @charset "UTF-8"; と記述される。
+
+// scss -> css conversion [watch / by folder]
+//   sass --style expanded -E utf-8 --watch scss:css
+
+/*
+  Comments to CSS
+  ここのコメントはCSS側に残ります
+*/
+
+// 変数
+$baseFontSize: 14px;
+$imgDir: "../img/";
+// $brandColor: red;
+$brandColor: rgba(255, 0, 0, 0.9);
+
+$debugMode: false;
+$releaseType: "mogok";
+$baseFontTransparency: 20;
+
+#main {
+	width: 90%;
+	// background: url($imgDir + "bg.png");		// 文字列の連結
+	background: url("#{$imgDir}bg.png");		// インライン評価
+
+	// @if - @else - @else if
+	@if $debugMode {
+		color: red;
+	} @else if $releaseType == "heroku" {
+		color: green;
+	} @else {
+		@if 30 < $baseFontTransparency {
+			color: black;
+		} @else {
+			color: white;
+		}
+	}
+
+	p { 
+		// color: $brandColor;
+		color: lighten($brandColor, 30%);		// Sassの関数も使える
+		font-size: 16px;
+
+		a {
+			text-decoration: none;
+
+			// &: は親要素のselectorを表す
+			&:hover {
+				font-weight: $baseFontSize;
+			}
+		}
+
+		.sub {
+			// 四則演算も使える
+			font-size: $baseFontSize - 2px;
+			// font-size: #{12 + 12}px;			// インライン評価は数値演算にも使える
+		}
+	}
+}
+
+// 繰り返し @for, @while
+
+@for $i from 10 through 14 {
+	.fs-for#{$i} { font-size: #{$i}px; }
+}
+
+$i: 10;
+@while $i <= 14 {
+	.fs-while#{$i} { font-size: #{$i}px; }
+	$i: $i + 1;
+}
+
+// リスト , @each
+// $animals: cat, dog, tiger;		// カンマ区切り
+$animals: cat dog tiger;			// スペース区切り
+
+// @eachでリストの内容を取り出しつつ実行 
+@each $animal in $animals {
+// @each $animal in cat, dog, tiger {	// リストは変数に入れずベタに書いてもOK
+	.#{$animal}-icon { background: url("#{$animal}.png"); }
+}
+
+// 関数 @function - @return
+// デバッグ出力 @debug
+
+///// 以下を _settings.scss に分離
+@import "settings";
+// $totalWidth: 940px;
+// $columnCount: 5;
+
+///// 関数は _functions.scss に分離
+@import "functions";
+// // カラム幅を計算
+// @function getColumnWidth($width, $count) {
+// 	// 関数内変数は外では使えない
+// 	$padding: 10px;
+// 	$columnWidth: floor(($width - ($padding * ($count - 1))) / $count);
+// 	@debug $columnWidth;	// 変換時に出力される
+// 	@return $columnWidth;
+// }
+
+.grid {
+	float: left;
+	width: getColumnWidth($totalWidth, $columnCount);
+}
+
+// mixin （マクロ的なもの）
+
+// 引数なし
+// @mixin round {
+// 	border-radius: 4px;
+// }
+
+// 引数有り
+// @mixin round($radius) {
+// 	border-radius: $radius;
+// }
+
+// 引数のデフォルト値あり
+@mixin round($radius:4px) {
+	border-radius: $radius;
+}
+
+.label {
+	font-size: 12px;
+	@include round;
+	// @include round(10px);
+}
+.item-label {
+	font-size: 12px;
+	@include round(2px);
+}
+
+
+// @extend （継承）
+//
+// mixinでも同じことが実現できるが、重複の多いCSSになることが難点。(extendは共通部分がまとめて記述される)
+// また、extendは継承であることを明示できるというメリットもある。
+
+.msg {
+	font-size: 12px;
+	font-weight: bold;
+	padding: 2px 4px;
+	color: white;
+}
+
+.errorMsg {
+	@extend .msg;
+	background: red;
+}
+
+.warningMsg {
+	@extend .msg;
+	background: orange;
+}

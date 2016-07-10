@@ -1,0 +1,107 @@
+@charset "UTF-8";
+/*
+  Comments to CSS
+  ここのコメントはCSS側に残ります
+*/
+#main {
+  width: 90%;
+  background: url("../img/bg.png");
+  color: white;
+}
+#main p {
+  color: rgba(255, 153, 153, 0.9);
+  font-size: 16px;
+}
+#main p a {
+  text-decoration: none;
+}
+#main p a:hover {
+  font-weight: 14px;
+}
+#main p .sub {
+  font-size: 12px;
+}
+
+.fs-for10 {
+  font-size: 10px;
+}
+
+.fs-for11 {
+  font-size: 11px;
+}
+
+.fs-for12 {
+  font-size: 12px;
+}
+
+.fs-for13 {
+  font-size: 13px;
+}
+
+.fs-for14 {
+  font-size: 14px;
+}
+
+.fs-while10 {
+  font-size: 10px;
+}
+
+.fs-while11 {
+  font-size: 11px;
+}
+
+.fs-while12 {
+  font-size: 12px;
+}
+
+.fs-while13 {
+  font-size: 13px;
+}
+
+.fs-while14 {
+  font-size: 14px;
+}
+
+.cat-icon {
+  background: url("cat.png");
+}
+
+.dog-icon {
+  background: url("dog.png");
+}
+
+.tiger-icon {
+  background: url("tiger.png");
+}
+
+.grid {
+  float: left;
+  width: 180px;
+}
+
+.label {
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+.item-label {
+  font-size: 12px;
+  border-radius: 2px;
+}
+
+.msg, .errorMsg, .warningMsg {
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 4px;
+  color: white;
+}
+
+.errorMsg {
+  background: red;
+}
+
+.warningMsg {
+  background: orange;
+}
+
+/*# sourceMappingURL=main.css.map */
