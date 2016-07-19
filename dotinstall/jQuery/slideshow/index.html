@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>jQueryでスライドショー</title>
+  <style>
+    body {
+      margin: 10px auto;
+      text-align: center;
+    }
+    .thumbnail {
+      width: 125px;
+      height: 83px;
+      opacity: 0.5;
+      cursor: pointer;
+    }
+    .current {
+      opacity: 1.0;
+    }
+
+    /* 隣接セレクタで thumbnail間に隙間を空ける */
+    .thumbnail + .thumbnail {
+      margin-left: 4px;
+    }
+  </style>
+</head>
+<body>
+<div id="thumbnails"></div>
+<div id="main"></div>
+<div id="nav">
+  <button id="prev">&laquo; 前へ</button>
+  <button id="next">次へ &raquo;</button>
+  <button id="play">再生</button>
+  <button id="stop">停止</button>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+  $(function () {
+    var files = [
+      'img1.jpg',
+      'img2.jpg',
+      'img3.jpg',
+      'img4.jpg'
+    ];
+    // サムネイル表示
+    var img;
+    var timer;
+    var currentNum = 0;
+    var nowPlaying = false;
+    for (var i = 0; i < files.length; i++){
+      img = $('<img>').attr('src', files[i]).addClass('thumbnail');
+      $('#thumbnails').append(img);
+    }
+
+    // 大きなイメージ表示
+    $('#main').append(
+        $('<img>').attr('src', files[0])
+    );
+    $('.thumbnail:first').addClass('current');
+
+    // サムネイルclickイベントハンドラ
+    $('.thumbnail').click(function () {
+      $('#main img').attr('src', $(this).attr('src'));
+      currentNum = $(this).index();   // thumbnailクラス要素の何番目か(0-)
+      $(this).addClass('current').siblings().removeClass('current');  // siblings()兄弟要素
+    });
+    // 前へ・次へ ボタン
+    $('#prev').click(function () {
+      currentNum--;
+      if (currentNum < 0){
+        currentNum = files.length - 1;
+      }
+      $('#main img').attr('src', files[currentNum]);
+      $('.thumbnail').removeClass('current'); // 全てのthumbnailからcurrentを削除
+      $('.thumbnail').eq(currentNum).addClass('current');
+    });
+    $('#next').click(function () {
+      currentNum++;
+      if (files.length <= currentNum){
+        currentNum = 0;
+      }
+      $('#main img').attr('src', files[currentNum]);
+      $('.thumbnail').removeClass('current'); // 全てのthumbnailからcurrentを削除
+      $('.thumbnail').eq(currentNum).addClass('current');
+    });
+
+    // 自動再生・停止
+    function autoPlay() {
+      $('#next').click();
+      timer = setTimeout(function () {
+        autoPlay();
+      }, 1000);
+    }
+    $('#play').click(function () {
+      if (nowPlaying) return;
+      nowPlaying = true;
+      autoPlay();
+    });
+    $('#stop').click(function () {
+      clearTimeout(timer);
+      nowPlaying = false;
+    });
+
+  });
+</script>
+
+
+</body>
+</html>
