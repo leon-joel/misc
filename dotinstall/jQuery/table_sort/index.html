@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>jQueryで作るTableソート</title>
+</head>
+<body>
+
+<table>
+  <thead>
+    <tr>
+      <th class="dothesort" data-type="string">名前<span></span></th>
+      <th class="dothesort" data-type="integer">点数<span></span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>yamada</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <td>yamagishi</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>aiko</td>
+      <td>53</td>
+    </tr>
+    <tr>
+      <td>aikou</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+  $(function () {
+    // 並べ替え順を設定
+    var sortOrder = 1;  // 1:昇順  -1:降順
+
+    // ヘッダーをクリック
+    $('.dothesort').click(function () {
+      var type = $(this).data('type');  // string, integer
+      var col = $(this).index();        // 0, 1, ...
+
+      // 行全体を取得 ※変数の前の$はjQueryのオブジェクトであることを示す ※スクリプト上の意味は特にない
+      var $rows = $('tbody>tr');  // tr要素の配列
+
+      // 行を点数で並べ替え ※JSのsort関数を使用
+      $rows.sort(function (a, b) {
+        return compare(a, b, type, col) * sortOrder;         // 降順の場合は結果を反転
+      });
+      // tbodyを並べ替えされた行全体で入れ替え
+      $('tbody').empty().append($rows);
+
+      // 昇順・降順を示すマークを表示
+      var arrow = sortOrder === 1 ? "▲" : "▼";
+      $('.dothesort > span').text("");
+      $(this).find('span').text(arrow);
+
+      // 並べ替え順を反転
+      sortOrder *= -1;
+    });
+
+    function compare(a, b, type, col) {
+      var _a = $(a).find('td').eq(col).text();
+      var _b = $(b).find('td').eq(col).text();
+
+      if (type == "string"){
+        if (_a < _b){
+          return -1;
+        }else if (_b < _a){
+          return 1;
+        }else{
+          return 0;
+        }
+      }else{
+        _a *= 1;    // *1 で文字列を数値に変換している
+        _b *= 1;
+        return _a - _b;
+      }
+    }
+  })
+</script>
+</body>
+</html>
