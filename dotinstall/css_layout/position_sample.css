@@ -1,0 +1,55 @@
+.elem {
+  border: solid #6AC5AC 3px;
+  position: relative;
+}
+.elem-green {
+  border: solid #FDC72F 3px;
+}
+.elem-green > .label, .elem-green > .endlabel {
+  background-color: #FDC72F;
+}
+
+.label {
+  top: 0;
+  left: 0;
+  padding: 0 3px 3px 0;
+}
+.endlabel {
+  right: 0;
+  bottom: 0;
+  padding: 3px 0 0 3px;
+}
+.label, .endlabel {
+  position: absolute;
+  background-color: #6AC5AC;
+  color: #414142;
+  line-height: 1em;
+}
+
+.container {
+  position: relative;
+
+  /*box-sizing: border-box;*/
+
+  color: #414142;
+}
+nav {
+  position: absolute;
+  left: 0px;
+  width: 200px;
+}
+section {
+  /* position is static by default */
+  margin-left: 200px;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 70px;
+  background-color: white;
+  width: 100%;
+}
+body {
+  margin-bottom: 120px;
+}
