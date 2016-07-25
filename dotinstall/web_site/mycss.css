@@ -78,3 +78,24 @@ body > #container {
   text-decoration: none;
   display: block;   /* 親要素一杯まで広がる？？？（文字の外側もクリックできるようになる） */
 }
+
+h2, h3 {
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 16px;
+  border-left: 5px solid #cccccc;   /* 左端の縦棒見出し かっこいい */
+  padding: 3px 0 3px 10px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  border-bottom: 1px solid #cccccc; /* 見出し下の下線 これもかっこいい（というかそれっぽい）*/
+  padding: 3px 0;
+  margin-bottom: 10px;
+}
+
+p {
+  margin-bottom: 1em;   /* 下との感覚を1行分空ける */
+}
