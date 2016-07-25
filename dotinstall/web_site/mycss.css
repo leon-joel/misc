@@ -1,8 +1,26 @@
-#container {
-  width: 600px;
-  margin: 0 auto;   /* 上下は0、左右は自動（均等に） */
+html {
+  background-image: url("bg_gray.png");
+  height:100%;    /* containerを下まで無限に延ばす。▲はそのための設定 */
 }
 
+body {
+  height:      100%;    /* ▲ */
+  font-family: Verdana, Arial, serif;
+}
+
+body > #container {
+  height: auto;   /* ▲ */
+}
+
+#container {
+  min-height: 100%;   /* ▲ */
+  height:100%;        /* ▲ */
+  width: 600px;
+  margin: 0 auto;   /* 上下は0、左右は自動（均等に） */
+  padding: 0 10px;
+  background-color: white;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
 
 #header {
   margin-bottom: 15px;
