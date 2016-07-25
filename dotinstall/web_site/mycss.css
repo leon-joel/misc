@@ -1,0 +1,34 @@
+#container {
+  width: 600px;
+  margin: 0 auto;   /* 上下は0、左右は自動（均等に） */
+}
+
+
+#header {
+  margin-bottom: 15px;
+}
+
+#menu {
+  margin-bottom: 15px;
+}
+
+#main {
+  /* footerが入り込んでこないように overflow:hiddenを設定する */
+  /* ※これがないとmainの高さが0になってしまい、footerが浸食してくる */
+  overflow: hidden;
+  margin-bottom: 15px;    /* さらに footerとの間に隙間を空ける */
+}
+
+#contents {
+  float: left;
+  width: 400px;
+}
+
+#sidebar {
+  float: right;
+  width: 180px;
+}
+
+#footer {
+
+}
