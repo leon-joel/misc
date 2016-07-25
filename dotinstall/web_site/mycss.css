@@ -99,3 +99,28 @@ h3 {
 p {
   margin-bottom: 1em;   /* 下との感覚を1行分空ける */
 }
+
+ul.products {
+  margin-bottom: 15px;
+}
+
+ul.products>li {
+  overflow: hidden;   /* 次のliが回り込んでこないようにする */
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px dotted #cccccc;
+}
+ul.products>li:last-child {
+  /* 最後だけは区切り線を付けない */
+  border: none;
+}
+
+ul.products>li>img {
+  float: left;
+  width: 60px;      /* floatを付けたら必ずwidthを指定すること! */
+}
+
+ul.products>li>p {
+  margin-left: 70px;
+  font-size: 13px;
+}
