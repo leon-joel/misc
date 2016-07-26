@@ -125,10 +125,14 @@ ul.products>li>p {
   font-size: 13px;
 }
 
+div.article {
+  overflow: hidden;   /* 次のp, divが回り込んでこないようにする */
+}
 div.sample {
   float: right;
   width: 66px;      /* floatを付けたら必ずwidthを指定すること! */
   margin-left: 10px;
+  position: relative; /* badgeの位置指定用 */
 }
 
 div.sample>p {
@@ -140,4 +144,16 @@ div.sample>img {
   padding: 2px;
   background: #ffffff;
   border: 1px solid #cccccc;
+}
+
+.badge {
+  background: red;
+  color: white;
+  font-size: 10px;
+  padding: 2px 4px 3px;
+
+  /*位置指定*/
+  position: absolute;
+  top: -5px;
+  right: -5px;
 }
