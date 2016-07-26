@@ -131,8 +131,9 @@ div.article {
 div.sample {
   float: right;
   width: 66px;      /* floatを付けたら必ずwidthを指定すること! */
-  margin-left: 10px;
+  margin: 10px 10px 0 10px;    /* badgeの飛び出し分のマージンを確保する ※これがないと飛び出したところが切れる */
   position: relative; /* badgeの位置指定用 */
+
 }
 
 div.sample>p {
@@ -140,6 +141,7 @@ div.sample>p {
 }
 
 div.sample>img {
+  /*margin: 15px 15px 0 0;*/
   /*枠を付ける ※ここで指定したpaddingとborderの分（6px）をdiv.sampleのwidthに追加しておく*/
   padding: 2px;
   background: #ffffff;
@@ -156,4 +158,10 @@ div.sample>img {
   position: absolute;
   top: -5px;
   right: -5px;
+}
+
+/*アイコン付きリスト*/
+ul.submenu>li {
+  background: url('circle16.png') no-repeat;
+  padding: 0 0 5px 20px;
 }
