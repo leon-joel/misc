@@ -97,7 +97,7 @@ h3 {
 }
 
 p {
-  margin-bottom: 1em;   /* 下との感覚を1行分空ける */
+  margin-bottom: 1em;   /* 下との間隔を1行分空ける */
 }
 
 ul.products {
@@ -121,6 +121,23 @@ ul.products>li>img {
 }
 
 ul.products>li>p {
-  margin-left: 70px;
+  margin-left: 70px;  /* imgの分左側を空けておく */
   font-size: 13px;
+}
+
+div.sample {
+  float: right;
+  width: 66px;      /* floatを付けたら必ずwidthを指定すること! */
+  margin-left: 10px;
+}
+
+div.sample>p {
+  font-size: 12px;
+}
+
+div.sample>img {
+  /*枠を付ける ※ここで指定したpaddingとborderの分（6px）をdiv.sampleのwidthに追加しておく*/
+  padding: 2px;
+  background: #ffffff;
+  border: 1px solid #cccccc;
 }
