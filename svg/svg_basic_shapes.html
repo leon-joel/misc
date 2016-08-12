@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SVGの基本図形</title>
+  <script src="lib/raphael.js"></script>
+  <style>
+    ul.shapes, ul.shapes2 {
+      list-style-type: none;
+      margin:          0 30px;
+      padding:         0;
+    }
+
+    ul.shapes li {
+      width: 100px;
+      float: left;
+    }
+
+    ul.shapes2 li {
+      width: 170px;
+      float: left;
+    }
+  </style>
+</head>
+<body>
+<div class="content">
+  <h1>SVGの基本図形</h1>
+  <h2>SVGDOM</h2>
+  <div id="svg-samples"></div>
+  <ul class="shapes">
+    <li>rect
+    <li>rect(角丸)
+    <li>circle
+    <li>ellipse
+    <li>line
+    <li>polyline
+    <li>polygon
+    <li>path(zなし)
+    <li>path(zあり)
+  </ul>
+  <h2>Raphael</h2>
+  <div id="raphael-samples"></div>
+  <script>
+    (function () {
+      if (!document.createElementNS) return;
+      var root = document.getElementById('svg-samples');
+      var SVG = 'http://www.w3.org/2000/svg';
+// svg要素を作る
+      var svg = document.createElementNS(SVG, 'svg');
+      svg.setAttribute('width', '1000');
+      svg.setAttribute('height', '200');
+
+// rect要素を作成
+      var rect1 = document.createElementNS(SVG, 'rect');
+      rect1.setAttribute('x', '20');
+      rect1.setAttribute('y', '20');
+      rect1.setAttribute('width', '80');
+      rect1.setAttribute('height', '80');
+// 塗りつぶし色を指定
+      rect1.setAttribute("fill", "skyblue");
+// 文書に追加
+      svg.appendChild(rect1);
+
+// rect要素を作成
+      var rect2 = document.createElementNS(SVG, 'rect');
+      rect2.setAttribute('x', '120');
+      rect2.setAttribute('y', '20');
+      rect2.setAttribute('width', '80');
+      rect2.setAttribute('height', '80');
+// 角の丸みを指定
+      rect2.setAttribute('ry', '20');
+// 塗りつぶし色を指定
+      rect2.setAttribute("fill", "skyblue");
+// 文書に追加
+      svg.appendChild(rect2);
+
+
+// circle要素を作成
+      var circle = document.createElementNS(SVG, 'circle');
+      circle.setAttribute('cx', '260');
+      circle.setAttribute('cy', '60');
+      circle.setAttribute('r', '40');
+// 塗りつぶし色を指定
+      circle.setAttribute("fill", "skyblue");
+// 文書に追加
+      svg.appendChild(circle);
+
+
+// ellipse要素を作成
+      var ellipse = document.createElementNS(SVG, 'ellipse');
+      ellipse.setAttribute('cx', '360');
+      ellipse.setAttribute('cy', '60');
+      ellipse.setAttribute('rx', '40');
+      ellipse.setAttribute('ry', '10');
+// 塗りつぶし色を指定
+      ellipse.setAttribute("fill", "skyblue");
+// 文書に追加
+      svg.appendChild(ellipse);
+
+
+// line要素を作成
+      var line = document.createElementNS(SVG, 'line');
+      line.setAttribute('x1', '410');
+      line.setAttribute('y1', '20');
+      line.setAttribute('x2', '500');
+      line.setAttribute('y2', '80');
+// 色を指定
+      line.setAttribute("stroke", "skyblue");
+// 文書に追加
+      svg.appendChild(line);
+
+
+// polyline要素を作成
+      var polyline = document.createElementNS(SVG, 'polyline');
+      polyline.setAttribute('points', '500,0 600,0 550,100');
+      var polygon = document.createElementNS(SVG, 'polygon');
+      for (var i = 0; i < 10; i += 2) {
+        var p = svg.createSVGPoint();
+        p.x = Math.sin(Math.PI * 2 / 5 * i) * 50 + 650;
+        p.y = Math.cos(Math.PI * 2 / 5 * i) * 50 + 50;
+        polygon.points.appendItem(p);
+      }
+// 色を指定
+      polyline.setAttribute("stroke", "skyblue");
+      polygon.setAttribute("stroke", "skyblue");
+      polyline.setAttribute("fill", "none");
+      polygon.setAttribute("fill", "none");
+      polyline.setAttribute("stroke-width", "3px");
+      polygon.setAttribute("stroke-width", "3px");
+// 文書に追加
+      svg.appendChild(polyline);
+      svg.appendChild(polygon);
+
+      var path = document.createElementNS(SVG, 'path');
+      path.setAttribute('d', 'M700,0 800,0 750,100');
+      var path2 = document.createElementNS(SVG, 'path');
+      for (var i = 0; i < 10; i += 2) {
+        var x = Math.sin(Math.PI * 2 / 5 * i) * 50 + 850;
+        var y = Math.cos(Math.PI * 2 / 5 * i) * 50 + 50;
+        var p = (i === 0) ?
+            path2.createSVGPathSegMovetoAbs(x, y) :
+            path2.createSVGPathSegLinetoAbs(x, y);
+        path2.pathSegList.appendItem(p);
+      }
+      path.setAttribute("stroke", "skyblue");
+      path2.setAttribute("stroke", "skyblue");
+      path.setAttribute("fill", "none");
+      path2.setAttribute("fill", "none");
+      path.setAttribute("stroke-width", "3px");
+      path2.setAttribute("stroke-width", "3px");
+
+// path2を閉じる
+      path2.pathSegList.appendItem(path2.createSVGPathSegClosePath());
+      svg.appendChild(path);
+      svg.appendChild(path2);
+
+
+      root.appendChild(svg);
+
+    })();
+    (function () {
+      var root = document.getElementById('raphael-samples');
+// ベースとなる要素を作る
+      paper = Raphael(root, 1000, 200);
+// rectを作成
+      var rect1 = paper.rect(20, 20, 80, 80);
+// 塗りつぶし色を指定
+      rect1.attr("fill", "greenyellow");
+// 枠線をなしに
+      rect1.attr("stroke", "none");
+
+      var rect2 = paper.rect(120, 20, 80, 80, 20);
+// 塗りつぶし色を指定
+      rect2.attr("fill", "greenyellow");
+// 枠線をなしに
+      rect2.attr("stroke", "none");
+
+// circleを作成
+      var circle = paper.circle(260, 60, 40);
+// 塗りつぶし色を指定
+      circle.attr("fill", "greenyellow");
+// 枠線をなしに
+      circle.attr("stroke", "none");
+
+
+// ellipseを作成
+      var ellipse = paper.ellipse(360, 60, 40, 10);
+// 塗りつぶし色を指定
+      ellipse.attr("fill", "greenyellow");
+// 枠線をなしに
+      ellipse.attr("stroke", "none");
+
+
+// lineを作成(pathで代替)
+      var line = paper.path("M410 20L500 80");
+// 色を指定
+      line.attr("stroke", "greenyellow");
+
+// polygonを作成(pathで代替)
+      var polyline = paper.path("M700,0 800,0 750,100");
+      var path = '';
+      for (var i = 0; i < 10; i += 2) {
+        path += (i ? 'L' : 'M') + (Math.sin(Math.PI * 2 / 5 * i) * 50 + 850)
+            + ',' + (Math.cos(Math.PI * 2 / 5 * i) * 50 + 50) + ' ';
+      }
+      var polygon = paper.path(path + 'z');
+// 色を指定
+      polyline.attr("stroke", "greenyellow");
+      polygon.attr("stroke", "greenyellow");
+      polyline.attr("stroke-width", "3px");
+      polygon.attr("stroke-width", "3px");
+
+    })();
+  </script>
+
+  <h1>SVGの活用</h1>
+  <h2>SVGDOM</h2>
+  <div id="svg-samples2"></div>
+  <ul class="shapes2">
+    <li>g要素
+    <li>transform
+    <li>textPath
+    <li>Gradient
+  </ul>
+  <h2>Raphael</h2>
+  <div id="raphael-samples2"></div>
+  <script>
+    (function () {
+      if (!document.createElementNS) return;
+      var root = document.getElementById('svg-samples2');
+      var SVG = 'http://www.w3.org/2000/svg';
+      var XLINK = 'http://www.w3.org/1999/xlink';
+// svg要素を作る
+      var svg = document.createElementNS(SVG, 'svg');
+      svg.setAttribute('width', '1000');
+      svg.setAttribute('height', '200');
+
+      var g = document.createElementNS(SVG, 'g');
+      g.setAttribute('fill', 'dodgerblue');
+      for (var i = 0; i < 3; i++) {
+        var rect = document.createElementNS(SVG, 'rect');
+        rect.setAttribute('width', 40);
+        rect.setAttribute('height', 40);
+        rect.setAttribute('ry', 10);
+        rect.setAttribute('x', 10 + 70 * i);
+        rect.setAttribute('y', 10 + 70 * i);
+        g.appendChild(rect);
+      }
+      svg.appendChild(g);
+
+      var g2 = document.createElementNS(SVG, 'g');
+      g2.setAttribute('transform', 'translate(200,50) scale(0.5) rotate(45, 100, 100)');
+      g2.setAttribute('fill', 'dodgerblue');
+      for (var i = 0; i < 3; i++) {
+        var rect = document.createElementNS(SVG, 'rect');
+        rect.setAttribute('width', 40);
+        rect.setAttribute('height', 40);
+        rect.setAttribute('ry', 10);
+        rect.setAttribute('x', 10 + 70 * i);
+        rect.setAttribute('y', 10 + 70 * i);
+        g2.appendChild(rect);
+      }
+      svg.appendChild(g2);
+
+      var defs = document.createElementNS(SVG, 'defs');
+      svg.appendChild(defs);
+      var circlePath = document.createElementNS(SVG, 'path');
+      circlePath.setAttribute('d', 'M10 ,50' +
+          'C10 , 50  50,  0 100,50' +
+          'C100, 50 150,100 190,50' +
+          'M10 ,150' +
+          'C10 ,150  50,100 100,150' +
+          'C100,150 150,200 190,150');
+      circlePath.setAttribute('id', 'circlePath');
+      defs.appendChild(circlePath);
+
+      var g = document.createElementNS(SVG, 'g');
+      g.setAttribute('fill', 'dodgerblue');
+      g.setAttribute('font-size', '15');
+      g.setAttribute('transform', 'translate(300,0)');
+
+      var text = document.createElementNS(SVG, 'text');
+      var textPath = document.createElementNS(SVG, 'textPath');
+      textPath.setAttributeNS(XLINK, 'href', '#circlePath');
+      textPath.textContent = 'SVGとテキスト:textPathによる文字の表示のサンプルです';
+
+      var circle = document.createElementNS(SVG, 'use');
+      circle.setAttributeNS(XLINK, 'href', '#circlePath');
+      circle.setAttribute('fill', 'none');
+      circle.setAttribute('stroke', 'blue');
+
+      text.appendChild(textPath);
+      g.appendChild(text);
+      svg.appendChild(g);
+
+      var colorGradient = document.createElementNS(SVG, 'linearGradient');
+      colorGradient.setAttribute('id', 'colorGradient');
+      var stop1_1 = document.createElementNS(SVG, 'stop');
+      var stop1_2 = document.createElementNS(SVG, 'stop');
+      stop1_1.setAttribute('offset', '0%');
+      stop1_1.setAttribute('stop-color', '#0000ff');
+      stop1_2.setAttribute('offset', '100%');
+      stop1_2.setAttribute('stop-color', '#00ffff');
+      colorGradient.appendChild(stop1_1);
+      colorGradient.appendChild(stop1_2);
+      defs.appendChild(colorGradient);
+
+      var alphaGradient = document.createElementNS(SVG, 'linearGradient');
+      alphaGradient.setAttribute('id', 'alphaGradient');
+      alphaGradient.setAttribute('x1', '0');
+      alphaGradient.setAttribute('x2', '0');
+      alphaGradient.setAttribute('y1', '0');
+      alphaGradient.setAttribute('y2', '100%');
+      var stop2_1 = document.createElementNS(SVG, 'stop');
+      var stop2_2 = document.createElementNS(SVG, 'stop');
+      stop2_1.setAttribute('offset', '0%');
+      stop2_1.setAttribute('stop-color', '#0000ff');
+      stop2_1.setAttribute('stop-opacity', '1');
+      stop2_2.setAttribute('offset', '100%');
+      stop2_2.setAttribute('stop-color', '#00ffff');
+      stop2_2.setAttribute('stop-opacity', '0');
+      alphaGradient.appendChild(stop2_1);
+      alphaGradient.appendChild(stop2_2);
+      defs.appendChild(alphaGradient);
+
+      var rect1 = document.createElementNS(SVG, 'rect');
+      rect1.setAttribute('x', 500);
+      rect1.setAttribute('y', 0);
+      rect1.setAttribute('ry', 20);
+      rect1.setAttribute('width', 100);
+      rect1.setAttribute('height', 200);
+      rect1.setAttribute('fill', 'url(#colorGradient)');
+
+      var rect2 = document.createElementNS(SVG, 'rect');
+      rect2.setAttribute('x', 600);
+      rect2.setAttribute('y', 0);
+      rect2.setAttribute('ry', 20);
+      rect2.setAttribute('width', 100);
+      rect2.setAttribute('height', 200);
+      rect2.setAttribute('fill', 'url(#alphaGradient)');
+
+      svg.appendChild(rect1);
+      svg.appendChild(rect2);
+
+      root.appendChild(svg);
+
+    })();
+    (function () {
+      var root = document.getElementById('raphael-samples2');
+// ベースとなる要素を作る
+      paper = Raphael(root, 800, 200);
+      var st = paper.set();
+      for (var i = 0; i < 3; i++) {
+        st.push(paper.rect(10 + 70 * i, 10 + 70 * i, 40, 40, 10));
+      }
+      st.attr({fill: "YellowGreen"});
+      st.attr({stroke: "none"});
+
+      var st2 = paper.set();
+      for (var i = 0; i < 3; i++) {
+        st2.push(paper.rect(10 + 70 * i, 10 + 70 * i, 40, 40, 10));
+      }
+      st2.attr({fill: "YellowGreen"});
+      st2.attr({stroke: "none"});
+      st2.rotate(45, 100, 100);
+      st2.scale(0.5);
+      st2.translate(200, 50);
+
+      var rect1 = paper.rect(500, 0, 100, 200, 20);
+      rect1.attr({
+        gradient: '0-#9ACD32-#FFFF00',
+        stroke: 'none'
+      });
+      var rect2 = paper.rect(600, 0, 100, 200, 20);
+      rect2.attr({
+        gradient: '270-#9ACD32-#FFFF00',
+        stroke: 'none',
+        "fill-opacity": 0
+      });
+
+    })();
+  </script>
+
+</body>
+</html>
