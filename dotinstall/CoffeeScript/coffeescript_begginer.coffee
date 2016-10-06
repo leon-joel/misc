@@ -104,6 +104,8 @@ alert score if 60 < score
 # if else
 if 60 < score
   alert "OK"
+else if 40 < score
+  alert "Warn"
 else
   alert "NG"
 
