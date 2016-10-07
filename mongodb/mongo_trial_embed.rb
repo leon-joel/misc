@@ -21,18 +21,21 @@ class Address
   field :street
   field :post_code
   field :state
+
+  # inverse_of についての解説: http://shoken.hatenablog.com/entry/2015/07/14/095211
   embedded_in :person, :inverse_of => :addresses
 end
 
 class Email
   include Mongoid::Document
   field :address
+
+  # inverse_of についての解説: http://shoken.hatenablog.com/entry/2015/07/14/095211
   embedded_in :person, :inverse_of => :email
 end
 
 
 Person.destroy_all   # people コレクションを全削除 ※同上（だと思う）
-
 
 person = Person.new(:first_name => "Dudley")
 person.save
@@ -40,7 +43,7 @@ person.save
 person = Person.first
 p person
 
-
+puts "personにadressをembedして、一括でsaveする"
 person = Person.new(:first_name => "Secondary")
 address = Address.new(:street => "Upper Street")
 person.addresses << address
@@ -50,30 +53,29 @@ person = Person.where(first_name: "Secondary").first
 p person
 p person.addresses
 
-# adressedというコレクションは存在しない
+puts "adressesというコレクションは存在しない"
 addresses = Address.all.to_a
 p addresses
 
-
+puts "既存ドキュメントにemailをembedする"
 email = Email.new(:address => "second@moore.com")
 person.email = email
 email.save
-
 
 person = Person.where(first_name: "Secondary").first
 p person
 p person.email
 
 
+puts "親ドキュメントの属性とembeddedドキュメントの属性を同時に変更してsave"
 person.middle_initial = 'J'
 person.last_name = "Ichiro"
-person.save
-p person
 
 person.email.address = "second2@ore.com"
 person.save
 p person.email
 
+puts "配列の先頭要素の値だけを変更"
 address = person.addresses.first
 address.street = "Canondale Street"
 address.state = "NJ"
@@ -81,7 +83,7 @@ address.save
 p person.addresses
 
 
-puts "ルートドキュメントから子要素達を変更して、一括SAVE。※1ドキュメントなのでatmicな処理となる"
+puts "ルートドキュメントから子要素達を変更して、一括SAVE。※1ドキュメントなのでatomicな処理となる"
 person.middle_initial = "JJ"
 person.addresses.last.post_code = "987654"
 person.email.address = "jj@rate.com"
