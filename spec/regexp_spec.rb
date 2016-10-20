@@ -17,12 +17,22 @@ describe '正規表現の実験' do
     # \A … 文字列先頭
     # \z … 文字列末尾
 
-    it "POSIX文字クラスを検出する" do
+    it "制御文字が含まれているかどうかをチェックする" do
       expect(str1 =~ reg).to be_truthy
       expect($&).to eq str1
 
       expect(str2 =~ reg).to be_falsey
       expect($&).to be_nil
+    end
+
+    it '全角も制御文字とは扱われない＆全角文字数も正しくカウントされる' do
+      str = "東京都　港区　赤坂　１－２－２３ "
+      len = 17
+
+      expect(str =~ /\A[[:^cntrl:]]{#{len}}\z/).to be_truthy
+      expect($&).to eq str
+
+      expect(str.length).to eq len
     end
 
     it '参考:ヒアドキュメントの改行は \n のようだ' do
@@ -128,5 +138,4 @@ describe '正規表現の実験' do
       end
     end
   end
-
 end
