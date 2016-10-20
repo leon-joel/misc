@@ -24,6 +24,22 @@ describe '正規表現の実験' do
       expect(str2 =~ reg).to be_falsey
       expect($&).to be_nil
     end
+
+    it '参考:ヒアドキュメントの改行は \n のようだ' do
+      # ヒアドキュメントに限らず、文字列リテラルに含まれる改行文字は常に \n となるようだ。
+      # https://docs.ruby-lang.org/ja/latest/doc/spec=2fliteral.html
+
+      str = <<~EOS
+        line1
+      EOS
+      expect(str).to eq "line1\n"
+
+      # 末尾改行を取り除くには chomp
+      str = <<~EOS.chomp
+        1st line
+      EOS
+      expect(str).to eq "1st line"
+    end
   end
 
   # 正規表現によるバリデーションでは ^ と $ ではなく \A と \z を使おう ～ 徳丸浩の日記
@@ -36,7 +52,7 @@ describe '正規表現の実験' do
   describe "正規表現によるバリデーションで ^ と $ を使ってしまうと" do
     reg2 = /^[[:^cntrl:]]+$/
 
-    it '行頭行末を使ってしまうと…' do
+    it '行頭行末 ^ $ を使ってしまうと…' do
       expect(str2 =~ reg2).to be_truthy         # 当然改行が含まれていても（1行目だけで）マッチしてしまう！
       expect($&).to eq "1-2-23, Nantoka-Cho,"   #
     end
