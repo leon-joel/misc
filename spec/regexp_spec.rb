@@ -57,16 +57,60 @@ describe '正規表現の実験' do
     end
 
     context '末尾改行がある場合' do
-      it '\Z はその手前まででマッチしてしまう' do
+      it '\Z はその手前にマッチしてしまう' do
         expect("abc\n" =~ /\Aabc\Z/).to be_truthy
         expect($&).to eq "abc"
         # つまり、\Zは末尾改行を特別扱いしていると言うこと。
       end
 
-      it '\z は末尾改行も含んでマッチする' do
+      it '\z は本当の文字列末尾（末尾改行の後ろ）にマッチする' do
         expect("abc\n" =~ /\Aabc\z/).to be_falsey
         expect($&).to be_nil
       end
     end
   end
+
+  describe " \\d \\w \\s は全角にもマッチする？" do
+
+    describe "[Ruby1.9.3以降？] デフォルトでは \\d \\w \\s は全角文字にマッチしない" do
+      it "全角数字は \\d に含まれない"do
+        expect("０１８９" =~ /\d+/).to be_falsey
+        expect($&).to be_nil
+      end
+  
+      it "全角文字（全角スペースも）は \\w に含まれない" do
+        expect("ＡＢＣａｂｃＸＹＺｘｙｚ　" =~ /\w+/).to be_falsey
+        expect($&).to be_nil
+      end
+
+      it "空白文字[ \\t\\r\\n\\f\\v] \\s" do
+        expect("　" =~ /\s+/).to be_falsey
+        expect($&).to be_nil
+      end
+
+    end
+
+    describe "[Ruby2.0以降] 正規表現オプション (?u: xxx) を付けると全角にもマッチする" do
+      it "10進数字[0-9] \\d "do
+        expect("0189０１８９" =~ /(?u:\d)+/).to be_truthy
+        expect($&).to eq "0189０１８９"
+      end
+
+      it "単語構成文字[a-zA-Z0-9_] \\w" do
+        expect("AZazＡＢＣａｂｃＸＹＺｘｙｚ" =~ /(?u:\w)+/).to be_truthy
+        expect($&).to eq "AZazＡＢＣａｂｃＸＹＺｘｙｚ"
+      end
+
+      it "空白文字[ \\t\\r\\n\\f\\v] \\s" do
+        expect(" 　\t\n" =~ /(?u:\s)+/).to be_truthy
+        expect($&).to eq " 　\t\n"
+      end
+
+      it "但し16進数字[0-9a-fA-F] \\h は全角にはマッチしない"do
+        expect("09Af０９Ａｆ" =~ /\A(?u:\h)+\z/).to be_falsey
+        expect($&).to be_nil
+      end
+    end
+  end
+
 end
