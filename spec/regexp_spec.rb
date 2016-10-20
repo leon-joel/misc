@@ -1,0 +1,72 @@
+require 'rspec'
+
+describe '正規表現の実験' do
+
+  str1 =  "1-2-23, Nantoka-Cho, Minato, Tokyo, Japan"
+
+  str2 = <<~EOS
+    1-2-23, Nantoka-Cho,
+    Minato, Tokyo,
+    Japan
+  EOS
+
+  describe 'POSIX文字クラス' do
+    # 制御文字じゃない文字だけで構成されていることを確認
+    # ※ POSIX文字クラス [:xxx:] は文字クラス [] の中でしか使えない ※https://docs.ruby-lang.org/ja/latest/doc/spec=2fregexp.html
+    reg = /\A[[:^cntrl:]]+\z/
+    # \A … 文字列先頭
+    # \z … 文字列末尾
+
+    it "POSIX文字クラスを検出する" do
+      expect(str1 =~ reg).to be_truthy
+      expect($&).to eq str1
+
+      expect(str2 =~ reg).to be_falsey
+      expect($&).to be_nil
+    end
+  end
+
+  # 正規表現によるバリデーションでは ^ と $ ではなく \A と \z を使おう ～ 徳丸浩の日記
+  # http://blog.tokumaru.org/2014/03/z.html
+  # ※『安全なWEBアプリケーションの作り方』にも詳しく記載されている。(p.81あたり)
+  #
+  # Railsの正規表現でよく使われる \A \z って何？？ ～ jnchitoさんの記事
+  # http://qiita.com/jnchito/items/ea7832df6f64a9034872
+
+  describe "正規表現によるバリデーションで ^ と $ を使ってしまうと" do
+    reg2 = /^[[:^cntrl:]]+$/
+
+    it '行頭行末を使ってしまうと…' do
+      expect(str2 =~ reg2).to be_truthy         # 当然改行が含まれていても（1行目だけで）マッチしてしまう！
+      expect($&).to eq "1-2-23, Nantoka-Cho,"   #
+    end
+  end
+
+  describe "\\Z と \\z の違いを確認" do
+    # \Z, \z の違い
+    # http://www.rubylife.jp/regexp/anchor/index4.html
+    # \Z … 文字列末尾。但し、末尾が改行の場合はその手前まででマッチする。
+    # \z … 文字列末尾。（末尾改行も含む）
+
+    it '末尾改行がなければ \z も \Z も同じ結果だが…' do
+      expect("abc" =~ /\Aabc\Z/).to be_truthy
+      expect($&).to eq "abc"
+
+      expect("abc" =~ /\Aabc\z/).to be_truthy
+      expect($&).to eq "abc"
+    end
+
+    context '末尾改行がある場合' do
+      it '\Z はその手前まででマッチしてしまう' do
+        expect("abc\n" =~ /\Aabc\Z/).to be_truthy
+        expect($&).to eq "abc"
+        # つまり、\Zは末尾改行を特別扱いしていると言うこと。
+      end
+
+      it '\z は末尾改行も含んでマッチする' do
+        expect("abc\n" =~ /\Aabc\z/).to be_falsey
+        expect($&).to be_nil
+      end
+    end
+  end
+end
