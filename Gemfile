@@ -15,6 +15,9 @@ gem 'sqlite3'
 
 gem 'mongoid'
 
+gem 'parallel'
+
+
 gem 'simplecov'
 
 # Windowsでは動かない
