@@ -45,3 +45,5 @@ fabric.properties
 
 # Coverage directory
 **/coverage/
+
+.idea/
