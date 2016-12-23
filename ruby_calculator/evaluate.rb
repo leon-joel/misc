@@ -24,6 +24,17 @@ def evaluate(tree)
       left % right
     when '**' # 累乗
       left ** right
+
+    when '=='
+      left == right
+    when '>'
+      left > right
+    when '>='
+      left >= right
+    when '<'
+      left < right
+    when '<='
+      left <= right
   end
 end
 
