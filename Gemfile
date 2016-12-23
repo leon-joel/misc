@@ -17,6 +17,7 @@ gem 'mongoid'
 
 gem 'parallel'
 
+gem 'minruby'   # for Ruby Calculator : http://ascii.jp/elem/000/001/255/1255878/
 
 gem 'simplecov'
 
