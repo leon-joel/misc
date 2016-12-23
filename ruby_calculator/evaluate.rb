@@ -18,9 +18,12 @@ def evaluate(tree)
       left - right
     when '*'
       left * right
-    # when '/'
-    else
+    when '/'
       left / right
+    when '%'  # 剰余
+      left % right
+    when '**' # 累乗
+      left ** right
   end
 end
 
