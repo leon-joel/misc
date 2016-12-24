@@ -1,5 +1,17 @@
 require "minruby"
 
+def max(tree)
+  if tree[0] == "lit"
+    # 葉leafの場合は値を返すだけ
+    return tree[1]
+  end
+
+  # 節treeの場合は左右それぞれで再帰呼び出しし、大きい方を返す
+  left = max(tree[1])
+  right = max(tree[2])
+  [left, right].max
+end
+
 def evaluate(tree)
   if tree[0] == "lit"
     # 葉leafの場合は値を返すだけ

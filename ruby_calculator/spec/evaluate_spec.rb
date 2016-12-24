@@ -81,4 +81,13 @@ describe 'My behaviour' do
     tree = minruby_parse("(1 + 2) / 3 * 4 * (56 / 7 + 8 + 9)")
     expect(evaluate(tree)).to eq 100
   end
+
+  it 'max evaluation' do
+    expect(max(minruby_parse("1 + 2"))).to eq 2
+    expect(max(minruby_parse("1 + 2 * 3"))).to eq 3
+    expect(max(minruby_parse("1 + 4 + 3"))).to eq 4
+    expect(max(minruby_parse("3 - (1 * 2)"))).to eq 3
+    expect(max(minruby_parse("(1 ** 2) + (3 / 4) ^ 5"))).to eq 5
+  end
+
 end
