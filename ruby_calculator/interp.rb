@@ -39,6 +39,12 @@ def evaluate(tree, env)
     #  ["var_assign", "y", ["*", ["lit", 2], ["lit", 3]]]]
     env[tree[1]] = evaluate(tree[2], env)
     return
+
+  elsif tree[0] == "var_ref"
+    # ["stmts",
+    #   ["var_assign", "x", ["lit", 1]],
+    #   ["var_assign", "y", ["+", ["lit", 2], ["var_ref", "x"]]]]
+    return env[tree[1]]
   end
 
   # 節treeの場合は左右それぞれで再帰呼び出し
