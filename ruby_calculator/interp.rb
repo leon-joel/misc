@@ -17,11 +17,29 @@ def evaluate(tree, env)
     # 葉leafの場合は値を返すだけ
     return tree[1]
 
+  elsif tree[0] == "var_assign"
+    #  ["var_assign", "x", ["lit", 1]],
+    #  ["var_assign", "y", ["*", ["lit", 2], ["lit", 3]]]]
+    return env[tree[1]] = evaluate(tree[2], env)
+
+  elsif tree[0] == "var_ref"
+    # ["stmts",
+    #   ["var_assign", "x", ["lit", 1]],
+    #   ["var_assign", "y", ["+", ["lit", 2], ["var_ref", "x"]]]]
+    return env[tree[1]]
+
   elsif tree[0] == "func_call"
     # 例) ["func_call", "p", ["+", ["lit", 40], ["lit", 2]]]
 
     # 仮の実装 ※tree[1]に入っている関数名は無視して p を呼び出している
     return p(evaluate(tree[2], env))
+
+  elsif tree[0] == "if"
+    if evaluate(tree[1], env)
+      return evaluate(tree[2], env)
+    else
+      return evaluate(tree[3], env)
+    end
 
   elsif tree[0] == "stmts"
     # 複文対応
@@ -33,19 +51,11 @@ def evaluate(tree, env)
     end
     return last
 
-  elsif tree[0] == "var_assign"
-    #  ["var_assign", "x", ["lit", 1]],
-    #  ["var_assign", "y", ["*", ["lit", 2], ["lit", 3]]]]
-    return env[tree[1]] = evaluate(tree[2], env)
-
-  elsif tree[0] == "var_ref"
-    # ["stmts",
-    #   ["var_assign", "x", ["lit", 1]],
-    #   ["var_assign", "y", ["+", ["lit", 2], ["var_ref", "x"]]]]
-    return env[tree[1]]
   end
 
-  # 節treeの場合は左右それぞれで再帰呼び出し
+  # 以下は全て二項演算子
+
+  # 左右それぞれを評価 ※本当は演算子で分岐したあとで left/right を評価したいところだが、現時点ではこのままでよしとする
   left = evaluate(tree[1], env)
   right = evaluate(tree[2], env)
 
