@@ -21,8 +21,7 @@ def evaluate(tree, env)
     # 例) ["func_call", "p", ["+", ["lit", 40], ["lit", 2]]]
 
     # 仮の実装 ※tree[1]に入っている関数名は無視して p を呼び出している
-    p(evaluate(tree[2], env))
-    return
+    return p(evaluate(tree[2], env))
 
   elsif tree[0] == "stmts"
     # 複文対応
@@ -37,8 +36,7 @@ def evaluate(tree, env)
   elsif tree[0] == "var_assign"
     #  ["var_assign", "x", ["lit", 1]],
     #  ["var_assign", "y", ["*", ["lit", 2], ["lit", 3]]]]
-    env[tree[1]] = evaluate(tree[2], env)
-    return
+    return env[tree[1]] = evaluate(tree[2], env)
 
   elsif tree[0] == "var_ref"
     # ["stmts",
@@ -54,6 +52,9 @@ def evaluate(tree, env)
   # 演算子で分岐
   case tree[0]
     when '+'
+      # +演算子の実行回数をカウント ※第5回 練習問題2 http://ascii.jp/elem/000/001/264/1264148/
+      env["plus_count"] += 1 if env.has_key?("plus_count")  # 演算結果を返さないと行けないので、countを先に行う
+
       left + right
     when '-'
       left - right
@@ -76,6 +77,11 @@ def evaluate(tree, env)
       left < right
     when '<='
       left <= right
+
+    else
+      puts 'unknown operator found!'
+      pp tree
+      raise "unknown_operator"
   end
 end
 
@@ -90,13 +96,11 @@ if $0 == __FILE__
 
   # ② 計算式の文字列を計算の木に変換する
   tree = minruby_parse(str)
+  # pp tree
 
   # ③ 計算の木を実行（計算）する
-  env = {}
+  env = {}  # 環境（変数格納）用のhash
   answer = evaluate(tree, env)
-
-  # ④ 計算結果を出力する
-  # p(answer)
 end
 
 
