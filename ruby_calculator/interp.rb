@@ -41,6 +41,12 @@ def evaluate(tree, env)
       return evaluate(tree[3], env)
     end
 
+  elsif tree[0] == "while"
+    while evaluate(tree[1], env)
+      evaluate(tree[2], env)
+    end
+    return  # rubyのwhile文はnilを返すのでMinRubyもそれに倣ってみる
+
   elsif tree[0] == "stmts"
     # 複文対応
     i = 1
