@@ -13,6 +13,8 @@ def max(tree)
 end
 
 def evaluate(tree, env)
+  return nil if tree.nil?   # これがあることでelseのないif文に対応できる
+
   if tree[0] == "lit"
     # 葉leafの場合は値を返すだけ
     return tree[1]
