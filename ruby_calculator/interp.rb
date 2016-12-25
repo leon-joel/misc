@@ -49,6 +49,15 @@ def evaluate(tree, env)
     end
     return  # rubyのwhile文はnilを返すのでMinRubyもそれに倣ってみる
 
+  elsif tree[0] == "while2"
+    # begin - end while (xxx) のパターン ※rubyでいうところの while 修飾子 ※Rubyではnilを返す
+    # ※rubyのbegin-end whileをそのまま使っても面白くないので、while文を使って実装する
+    evaluate(tree[2], env)        # まずは無条件で tree[2] を実行
+    while evaluate(tree[1], env)  # 次に条件を判定して
+      evaluate(tree[2], env)      # 条件に合致していれば tree[2] を実行する
+    end
+    return  # rubyのwhile修飾子（式）はnilを返すのでMinRubyもそれに倣ってみる
+
   elsif tree[0] == "stmts"
     # 複文対応
     i = 1
@@ -114,7 +123,7 @@ if $0 == __FILE__
 
   # ② 計算式の文字列を計算の木に変換する
   tree = minruby_parse(str)
-  # pp tree
+  pp tree
 
   # ③ 計算の木を実行（計算）する
   env = {}  # 環境（変数格納）用のhash
