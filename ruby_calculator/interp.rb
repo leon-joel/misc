@@ -12,7 +12,7 @@ def max(tree)
   [left, right].max
 end
 
-def evaluate(tree, env)
+def evaluate(tree, genv, lenv)
   return nil if tree.nil?   # これがあることでelseのないif文に対応できる
 
   if tree[0] == "lit"
@@ -22,39 +22,59 @@ def evaluate(tree, env)
   elsif tree[0] == "var_assign"
     #  ["var_assign", "x", ["lit", 1]],
     #  ["var_assign", "y", ["*", ["lit", 2], ["lit", 3]]]]
-    return env[tree[1]] = evaluate(tree[2], env)
+    return lenv[tree[1]] = evaluate(tree[2], genv, lenv)
 
   elsif tree[0] == "var_ref"
     # ["stmts",
     #   ["var_assign", "x", ["lit", 1]],
     #   ["var_assign", "y", ["+", ["lit", 2], ["var_ref", "x"]]]]
-    return env[tree[1]]
+    return lenv[tree[1]]
 
   elsif tree[0] == "func_call"
     # 例) ["func_call", "p", ["+", ["lit", 40], ["lit", 2]]]
 
     # 仮の実装 ※tree[1]に入っている関数名は無視して p を呼び出している
-    return p(evaluate(tree[2], env))
+    # return p(evaluate(tree[2], genv, lenv))
+
+    # 関数に渡す引数を配列に入れていく
+    args = []
+    i = 0
+    while tree[i + 2]
+      args << evaluate(tree[i + 2], genv, lenv)
+      i += 1
+    end
+
+    # 呼び出すべき関数配列を取得
+    # genv = { 《関数名》 => ["builtin", 《本物のRubyにおける関数の名前》] }
+    mhd = genv[tree[1]]
+
+    if mhd[0] == "builtin"
+      # 組み込み関数
+      return minruby_call(mhd[1], args)
+    else
+      # ユーザー定義関数
+      return
+    end
 
   elsif tree[0] == "if"
-    if evaluate(tree[1], env)
-      return evaluate(tree[2], env)
+    if evaluate(tree[1], genv, lenv)
+      return evaluate(tree[2], genv, lenv)
     else
-      return evaluate(tree[3], env)
+      return evaluate(tree[3], genv, lenv)
     end
 
   elsif tree[0] == "while"
-    while evaluate(tree[1], env)
-      evaluate(tree[2], env)
+    while evaluate(tree[1], genv, lenv)
+      evaluate(tree[2], genv, lenv)
     end
     return  # rubyのwhile文はnilを返すのでMinRubyもそれに倣ってみる
 
   elsif tree[0] == "while2"
     # begin - end while (xxx) のパターン ※rubyでいうところの while 修飾子 ※Rubyではnilを返す
     # ※rubyのbegin-end whileをそのまま使っても面白くないので、while文を使って実装する
-    evaluate(tree[2], env)        # まずは無条件で tree[2] を実行
-    while evaluate(tree[1], env)  # 次に条件を判定して
-      evaluate(tree[2], env)      # 条件に合致していれば tree[2] を実行する
+    evaluate(tree[2], genv, lenv)        # まずは無条件で tree[2] を実行
+    while evaluate(tree[1], genv, lenv)  # 次に条件を判定して
+      evaluate(tree[2], genv, lenv)      # 条件に合致していれば tree[2] を実行する
     end
     return  # rubyのwhile修飾子（式）はnilを返すのでMinRubyもそれに倣ってみる
 
@@ -63,7 +83,7 @@ def evaluate(tree, env)
     i = 1
     last = nil
     while tree[i] != nil
-      last = evaluate(tree[i], env)
+      last = evaluate(tree[i], genv, lenv)
       i = i + 1
     end
     return last
@@ -73,14 +93,14 @@ def evaluate(tree, env)
   # 以下は全て二項演算子
 
   # 左右それぞれを評価 ※本当は演算子で分岐したあとで left/right を評価したいところだが、現時点ではこのままでよしとする
-  left = evaluate(tree[1], env)
-  right = evaluate(tree[2], env)
+  left = evaluate(tree[1], genv, lenv)
+  right = evaluate(tree[2], genv, lenv)
 
   # 演算子で分岐
   case tree[0]
     when '+'
       # +演算子の実行回数をカウント ※第5回 練習問題2 http://ascii.jp/elem/000/001/264/1264148/
-      env["plus_count"] += 1 if env.has_key?("plus_count")  # 演算結果を返さないと行けないので、countを先に行う
+      lenv["plus_count"] += 1 if lenv.has_key?("plus_count")  # 演算結果を返さないと行けないので、countを先に行う
 
       left + right
     when '-'
@@ -112,6 +132,14 @@ def evaluate(tree, env)
   end
 end
 
+# 関数格納用のhashを返す
+def prepare_genv
+  {
+      "p" => ["builtin", "p"],
+      "raise" => ["builtin", "raise"],
+  }
+end
+
 ####################################################################
 ###
 ### Main
@@ -126,8 +154,7 @@ if $0 == __FILE__
   pp tree
 
   # ③ 計算の木を実行（計算）する
-  env = {}  # 環境（変数格納）用のhash
-  answer = evaluate(tree, env)
+  answer = evaluate(tree, prepare_genv, {} )
 end
 
 
