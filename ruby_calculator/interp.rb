@@ -12,6 +12,10 @@ def max(tree)
   [left, right].max
 end
 
+def add(x, y)
+  x + y
+end
+
 def evaluate(tree, genv, lenv)
   return nil if tree.nil?   # これがあることでelseのないif文に対応できる
 
@@ -136,6 +140,7 @@ end
 def prepare_genv
   {
       "p" => ["builtin", "p"],
+      "add" => ["builtin", "add"],
       "raise" => ["builtin", "raise"],
   }
 end

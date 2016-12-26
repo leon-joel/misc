@@ -1,1 +1,1 @@
-raise "abc_error"
+p(add(1, 2))
