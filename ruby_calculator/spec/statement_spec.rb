@@ -67,7 +67,51 @@ describe 'while_statement' do
       end
     EOS
     tree = minruby_parse(src)
-    expect(evaluate(tree, env)).to be_nil
+    expect(evaluate(tree, env)).to be_nil  # 戻り値はnil
     expect(env["i"]).to eq 10
+  end
+
+  it 'never_loop' do
+    src = <<~EOS
+      i = 100
+      while i < 10
+        p(i)
+        i = i + 1
+      end
+    EOS
+    tree = minruby_parse(src)
+    expect(evaluate(tree, env)).to be_nil   # 戻り値はnil
+    expect(env["i"]).to eq 100
+  end
+
+end
+
+describe "begin_end_while_statement" do
+  let(:env) { {} }
+
+  it 'while2_loop' do
+    src = <<~EOS
+      i = 0
+      begin
+        p(i)
+        i = i + 1
+      end while i < 10
+    EOS
+    tree = minruby_parse(src)
+    expect(evaluate(tree, env)).to be_nil   # 戻り値はnil
+    expect(env["i"]).to eq 10
+  end
+
+  it 'once_loop' do
+    src = <<~EOS
+      i = 100
+      begin
+        p(i)
+        i = i + 1
+      end while i < 10
+    EOS
+    tree = minruby_parse(src)
+    expect(evaluate(tree, env)).to be_nil   # 戻り値はnil
+    expect(env["i"]).to eq 101
   end
 end
