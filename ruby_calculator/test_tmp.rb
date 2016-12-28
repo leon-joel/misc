@@ -1,1 +1,1 @@
-p(add(1, 2))
+fizzbuzz(20)

@@ -1,5 +1,7 @@
 require "minruby"
 
+require_relative "interp_builtin_methods"
+
 def max(tree)
   if tree[0] == "lit"
     # 葉leafの場合は値を返すだけ
@@ -12,9 +14,6 @@ def max(tree)
   [left, right].max
 end
 
-def add(x, y)
-  x + y
-end
 
 def evaluate(tree, genv, lenv)
   return nil if tree.nil?   # これがあることでelseのないif文に対応できる
@@ -142,6 +141,8 @@ def prepare_genv
       "p" => ["builtin", "p"],
       "add" => ["builtin", "add"],
       "raise" => ["builtin", "raise"],
+
+      "fizzbuzz" => ["builtin", "fizzbuzz"],
   }
 end
 
