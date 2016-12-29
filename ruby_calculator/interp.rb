@@ -62,13 +62,14 @@ def evaluate(tree, genv, lenv)
       return minruby_call(mhd[1], args)
     else
       # ユーザー定義関数
+      new_lenv = {}     # 関数内の環境（変数）
       params = mhd[1]   # 仮引数の配列 ※仮引数: 実引数に与えられた[関数内部での名前]
       i = 0
       while params[i]
-        lenv[params[i]] = args[i]   # 仮引数の名前 => 実引数（の値）
+        new_lenv[params[i]] = args[i]   # 仮引数の名前 => 実引数（の値）
         i += 1
       end
-      return evaluate(mhd[2], genv, lenv)  # 関数本体
+      return evaluate(mhd[2], genv, new_lenv)  # 関数本体
     end
 
   elsif tree[0] == "if"
