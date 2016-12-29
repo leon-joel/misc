@@ -33,6 +33,12 @@ def evaluate(tree, genv, lenv)
     #   ["var_assign", "y", ["+", ["lit", 2], ["var_ref", "x"]]]]
     return lenv[tree[1]]
 
+  elsif tree[0] == "func_def"
+    # ["func_def", "add", ["x", "y"], ["+", ["var_ref", "x"], ["var_ref", "y"]]]
+    genv[tree[1]] = ["user_defined", tree[2], tree[3]]
+    # 関数名 => ["user_defined", 仮引数名の配列, 関数本体]
+    return
+
   elsif tree[0] == "func_call"
     # 例) ["func_call", "p", ["+", ["lit", 40], ["lit", 2]]]
 
@@ -56,7 +62,13 @@ def evaluate(tree, genv, lenv)
       return minruby_call(mhd[1], args)
     else
       # ユーザー定義関数
-      return
+      params = mhd[1]   # 仮引数の配列 ※仮引数: 実引数に与えられた[関数内部での名前]
+      i = 0
+      while params[i]
+        lenv[params[i]] = args[i]   # 仮引数の名前 => 実引数（の値）
+        i += 1
+      end
+      return evaluate(mhd[2], genv, lenv)  # 関数本体
     end
 
   elsif tree[0] == "if"
