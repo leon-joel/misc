@@ -2,10 +2,14 @@ require 'rake/testtask'
 require "rspec/core/rake_task"
 
 
-desc "テストタスク Test::Unit版"
-# test/test_*.rb というファイル全てを自動的にテスト実行してくれる
-Rake::TestTask.new
+# testという名前空間に分ける
+namespace "test" do
+  desc "テストタスク Test::Unit版"
+  # test/test_*.rb というファイル全てを自動的にテスト実行してくれる
+  Rake::TestTask.new
 
-desc "テストタスク rspec版"
-# spec/*_spec.rb というファイル全てを自動的にテスト実行してくれる
-RSpec::Core::RakeTask.new("spec")
+  desc "テストタスク rspec版"
+  # spec/*_spec.rb というファイル全てを自動的にテスト実行してくれる
+  RSpec::Core::RakeTask.new("spec")
+
+end
