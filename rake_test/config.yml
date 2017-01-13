@@ -1,0 +1,9 @@
+test1:
+  user: marvin
+  passwd: xxxxxx
+  host: 192.168.0.10
+
+release:
+  user: visar
+  passwd: yyyyyy
+  host: 192.168.0.11

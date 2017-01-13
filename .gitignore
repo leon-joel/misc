@@ -46,4 +46,6 @@ fabric.properties
 # Coverage directory
 **/coverage/
 
-.idea/
+/rake_test/obj/
+/rake_test/dist/
+/rake_test/pkg/

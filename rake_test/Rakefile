@@ -1,0 +1,82 @@
+require 'rake/clean'
+require 'rake/packagetask'
+require 'rake/testtask'
+require 'yaml'
+
+SRC_DIR = "./src"
+OBJ_DIR = "./obj"
+DIST_DIR = "./dist"
+
+SRCS = FileList.new("#{SRC_DIR}/*.c")
+# puts "SRCS: #{SRCS}"
+# OBJS = SRCS.ext('o')  # 拡張子をすげ替えるだけならこれでOK
+OBJS = SRCS.pathmap("#{OBJ_DIR}/%n.o")   # %n: ファイル名のみ（拡張子を除く）
+# puts "OBJS: #{OBJS}"
+
+TARGET = "#{DIST_DIR}/hello"
+
+CLEAN.include(OBJS)
+CLEAN << OBJ_DIR
+CLOBBER.include(TARGET)
+CLOBBER << DIST_DIR
+
+desc "デフォルトタスク"
+task :default => ["clobber", "init", TARGET]
+
+# ディレクトリの定義（複数階層もOK）
+# ※ここでは定義しているだけ。実際にディレクトリを作成するには、これを前提条件に入れないといけない。
+directory OBJ_DIR
+directory DIST_DIR
+
+desc "初期化（ここではobjディレクトリを作成）"
+task "init" => OBJ_DIR
+
+desc "メインのTARGET作成"
+# file TARGET => [OBJS] do |t|  # ← [OBJS]と書いてしまうと t.name に配列がまとめて渡ってしまうのでダメ #  Errno::ENOENT: No such file or directory @ rb_sysopen - ./obj/src1.o ./obj/src2.o
+# file TARGET => OBJS do |t|    # ← これなら .o が別々に生成されるのでOK
+file TARGET => ["init", DIST_DIR, *OBJS] do |t|   # ← *OBJS で配列を展開してあげれば、他の依存とも一緒に書ける
+  copy "#{OBJ_DIR}/src1.o", t.name
+end
+
+# rule %r{^obj/.+\.o} => "%{^dist,src}X.c" do |t|
+rule '.o' => ["src/%n.c"] do |t|        # %n: ファイル名のみ（拡張子を除く）
+  copy t.source, t.name
+end
+# file "obj/src1.o" => "src/src1.c" do
+#   # 2回目は実行されないようになっている
+#   copy "src/src1.c", "obj/src1.o"
+# end
+# file "obj/src2.o" => "src/src2.c" do
+#   copy "src/src2.c", "obj/src2.o"
+# end
+
+desc "パッケージング"
+Rake::PackageTask.new("Hello", "1.0.0") do |p|
+  # p.package_dir = "./pkg"
+  p.package_files.include(TARGET)
+  # p.need_tar_gz = true    # sh経由で tar が呼び出される ※よってWindowsでは（普通は）動かない
+  # p.need_tar_bz2 = true   # 同上
+  p.need_zip = true         # 同上
+end
+
+# タスクの動的生成
+# 1.upto 5 do |i|
+#   desc "task no.#{i}"
+#   task "task_#{i}" do |t|
+#     puts "task invoked #{t.name}"
+#   end
+# end
+def deploy(param)
+  puts "Deploy to #{param['user']}@#{param['host']}"
+end
+
+conf = YAML.load_file 'config.yml'
+conf.each do |k, v|
+  desc "Deploy to #{k}"
+  task "deploy_#{k}" do
+    deploy(v)
+  end
+end
+
+desc "テストタスク Test::Unit版"
+Rake::TestTask.new
