@@ -1,7 +1,5 @@
 require 'rake/clean'
 require 'rake/packagetask'
-require 'rake/testtask'
-require "rspec/core/rake_task"
 require 'yaml'
 
 SRC_DIR = "./src"
@@ -79,10 +77,6 @@ conf.each do |k, v|
   end
 end
 
-desc "テストタスク Test::Unit版"
-# test/test_*.rb というファイル全てを自動的にテスト実行してくれる
-Rake::TestTask.new
-
-desc "テストタスク rspec版"
-# spec/*_spec.rb というファイル全てを自動的にテスト実行してくれる
-RSpec::Core::RakeTask.new("spec")
+# 他のRakefileをインポートする https://docs.ruby-lang.org/ja/latest/method/Kernel/i/import.html
+# require, load なども使えるようだが、様々な面で import を使った方が良さそうだ ※参考: http://www2s.biglobe.ne.jp/~idesaku/sss/tech/rake/
+import "Rakefile.test"
