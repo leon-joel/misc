@@ -10,7 +10,7 @@
     <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
     <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
     <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
-    <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="F:\work\github\ruby_sandbag\curry\curry.rb" />
+    <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="F:/work/github/ruby_sandbag/curry/curry.rb" />
     <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
     <method />
   </configuration>

@@ -72,6 +72,21 @@ def evaluate(tree, genv, lenv)
       return evaluate(mhd[2], genv, new_lenv)  # 関数本体
     end
 
+  elsif tree[0] == "ary_new"
+    # 配列構築子
+    ary = []
+    i = 0
+    while tree[i+1]
+      ary[i] = evaluate(tree[i+1], genv, lenv)
+      i += 1
+    end
+    return ary
+
+  elsif tree[0] == "ary_ref"
+    ary = evaluate(tree[1], genv, lenv)
+    idx = evaluate(tree[2], genv, lenv)
+    return ary[idx]
+
   elsif tree[0] == "if"
     if evaluate(tree[1], genv, lenv)
       return evaluate(tree[2], genv, lenv)
@@ -103,7 +118,6 @@ def evaluate(tree, genv, lenv)
       i = i + 1
     end
     return last
-
   end
 
   # 以下は全て二項演算子
