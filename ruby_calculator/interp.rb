@@ -82,6 +82,16 @@ def evaluate(tree, genv, lenv)
     end
     return ary
 
+  elsif tree[0] == "ary_assign"
+    # ["stmts",
+    #   ["var_assign", "ary", ["ary_new", ["lit", 1]]],
+    #   ["ary_assign", ["var_ref", "ary"], ["lit", 0], ["lit", 42]]]
+    ary = evaluate(tree[1], genv, lenv)
+    idx = evaluate(tree[2], genv, lenv)
+    val = evaluate(tree[3], genv, lenv)
+    ary[idx] = val
+    return val
+
   elsif tree[0] == "ary_ref"
     ary = evaluate(tree[1], genv, lenv)
     idx = evaluate(tree[2], genv, lenv)
