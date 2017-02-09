@@ -1,6 +1,6 @@
 require "minruby"
 
-require_relative "interp_builtin_methods"
+# require_relative "interp_builtin_methods"
 
 def max(tree)
   if tree[0] == "lit"
@@ -82,6 +82,11 @@ def evaluate(tree, genv, lenv)
     end
     return ary
 
+  elsif tree[0] == "ary_ref"
+    ary = evaluate(tree[1], genv, lenv)
+    idx = evaluate(tree[2], genv, lenv)
+    return ary[idx]
+
   elsif tree[0] == "ary_assign"
     # ["stmts",
     #   ["var_assign", "ary", ["ary_new", ["lit", 1]]],
@@ -92,10 +97,17 @@ def evaluate(tree, genv, lenv)
     ary[idx] = val
     return val
 
-  elsif tree[0] == "ary_ref"
-    ary = evaluate(tree[1], genv, lenv)
-    idx = evaluate(tree[2], genv, lenv)
-    return ary[idx]
+  elsif tree[0] == "hash_new"
+    # ["hash_new", ["lit", 1], ["lit", 10], ["lit", 2], ["lit", 20], ["lit", 3], ["lit", 30]]
+    h = {}
+    i = 0
+    while tree[i + 1]
+      key = evaluate(tree[i + 1], genv, lenv)
+      val = evaluate(tree[i + 2], genv, lenv)
+      h[key] = val
+      i = i + 2
+    end
+    return h
 
   elsif tree[0] == "if"
     if evaluate(tree[1], genv, lenv)
@@ -167,7 +179,7 @@ def evaluate(tree, genv, lenv)
 
     else
       puts 'unknown operator found!'
-      pp tree
+      # pp tree
       raise "unknown_operator"
   end
 end
@@ -179,7 +191,13 @@ def prepare_genv
       "add" => ["builtin", "add"],
       "raise" => ["builtin", "raise"],
 
-      "fizzbuzz" => ["builtin", "fizzbuzz"],
+      "require" => ["builtin", "require"],
+      "minruby_parse" => ["builtin", "minruby_parse"],
+      "minruby_load" => ["builtin", "minruby_load"],
+      "minruby_call" => ["builtin", "minruby_call"],
+
+      "return" => ["builtin", "return"],
+      # "fizzbuzz" => ["builtin", "fizzbuzz"],
   }
 end
 
@@ -188,17 +206,18 @@ end
 ### Main
 ###
 
-if $0 == __FILE__
+# if $0 == __FILE__
   # ① 計算式の文字列を読み込む
   str = minruby_load
 
   # ② 計算式の文字列を計算の木に変換する
   tree = minruby_parse(str)
-  pp tree
+  # pp tree
 
   # ③ 計算の木を実行（計算）する
-  answer = evaluate(tree, prepare_genv, {} )
-end
+  evaluate(tree, prepare_genv, {} )
+
+# end
 
 
 # tree = minruby_parse("(1 + 2) + (3 + 4)")
