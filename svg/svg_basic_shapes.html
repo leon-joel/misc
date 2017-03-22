@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title>SVGの基本図形</title>
   <script src="lib/raphael.js"></script>
+  <script src="lib/path-data-polyfill/path-data-polyfill.js"></script>
   <style>
     ul.shapes, ul.shapes2 {
       list-style-type: none;
@@ -52,6 +53,7 @@
 
 // rect要素を作成
       var rect1 = document.createElementNS(SVG, 'rect');
+      rect1.id = "svgdom_rect1";
       rect1.setAttribute('x', '20');
       rect1.setAttribute('y', '20');
       rect1.setAttribute('width', '80');
@@ -134,14 +136,17 @@
       var path = document.createElementNS(SVG, 'path');
       path.setAttribute('d', 'M700,0 800,0 750,100');
       var path2 = document.createElementNS(SVG, 'path');
+      var pathData = path2.getPathData();
       for (var i = 0; i < 10; i += 2) {
         var x = Math.sin(Math.PI * 2 / 5 * i) * 50 + 850;
         var y = Math.cos(Math.PI * 2 / 5 * i) * 50 + 50;
         var p = (i === 0) ?
-            path2.createSVGPathSegMovetoAbs(x, y) :
-            path2.createSVGPathSegLinetoAbs(x, y);
-        path2.pathSegList.appendItem(p);
+            pathData.push({type:'M', values:[x, y]}) :  // path2.createSVGPathSegMovetoAbs(x, y) :
+            pathData.push({type:'L', values:[x, y]});   // path2.createSVGPathSegLinetoAbs(x, y);
       }
+      pathData.push({type:'Z'});                        // path2.createSVGPathSegClosePath();
+      path2.setPathData(pathData);                    // path2.pathSegList.appendItem(p);
+
       path.setAttribute("stroke", "skyblue");
       path2.setAttribute("stroke", "skyblue");
       path.setAttribute("fill", "none");
@@ -150,13 +155,27 @@
       path2.setAttribute("stroke-width", "3px");
 
 // path2を閉じる
-      path2.pathSegList.appendItem(path2.createSVGPathSegClosePath());
+//      path2.pathSegList.appendItem(path2.createSVGPathSegClosePath());
       svg.appendChild(path);
       svg.appendChild(path2);
 
-
       root.appendChild(svg);
 
+      elem = document.getElementById("svgdom_rect1");
+      elem.addEventListener("mouseenter", () => {
+//        rect1.setAttribute("fill", "red");
+        rect1.setAttribute("stroke", "red");
+        rect1.setAttribute("stroke-width", "3");
+        rect1.setAttribute("stroke-linecap", "round");
+        console.log(`x:${rect1.x} y:${rect1.y} w:${rect1.width} h:${rect1.height}`);
+
+      });
+      elem.addEventListener("mouseleave", () => {
+//        rect1.setAttribute("fill", "skyblue");
+        rect1.removeAttribute("stroke");
+        rect1.removeAttribute("stroke-width");
+        rect1.removeAttribute("stroke-linecap");
+      });
     })();
     (function () {
       var root = document.getElementById('raphael-samples');
