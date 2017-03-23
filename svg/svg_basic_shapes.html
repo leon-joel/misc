@@ -5,6 +5,7 @@
   <title>SVGの基本図形</title>
   <script src="lib/raphael.js"></script>
   <script src="lib/path-data-polyfill/path-data-polyfill.js"></script>
+  <script src="lib/svg-pan-zoom-3.5.0/dist/svg-pan-zoom.js"></script>
   <style>
     ul.shapes, ul.shapes2 {
       list-style-type: none;
@@ -26,7 +27,8 @@
 <body>
 <div class="content">
   <h1>svgファイル読み込み</h1>
-  <object type="image/svg+xml" data="svg_xlink_01.svg" width="512" height="256"></object>
+  <object id="svg-xlink-01" type="image/svg+xml" data="svg_xlink_01.svg"
+          width="512" height="256" style="border:solid thin black;"></object>
 
   <h1>SVGの基本図形</h1>
   <h2>SVGDOM</h2>
@@ -246,7 +248,14 @@
   </ul>
   <h2>Raphael</h2>
   <div id="raphael-samples2"></div>
+
   <script>
+      window.onload = function () {
+          var panZoomTiger = svgPanZoom('#svg-xlink-01', {
+              zoomEnabled: true,
+              controlIconsEnabled: true
+          });
+      };
     (function () {
       if (!document.createElementNS) return;
       var root = document.getElementById('svg-samples2');
